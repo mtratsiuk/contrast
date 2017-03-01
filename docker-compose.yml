@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+
+  server:
+    build: ./server
+    ports:
+      - "80:$CONTRAST_SERVER_PORT"
+    env_file:
+      - .env
+
+  couch:
+    build:
+      context: ./couch
+      args:
+        - CONTRAST_COUCH_SECRET
+    volumes:
+      - /var/data/couchdb:/usr/local/var/lib/couchdb
+    env_file:
+      - .env

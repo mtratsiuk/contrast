@@ -1,0 +1,12 @@
+{
+  "name": "contrast",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "docker-compose build && docker-compose up -d"
+  },
+  "author": "Mihail Tratsiuk",
+  "license": "MIT",
+  "devDependencies": {
+    "standard": "^8.6.0"
+  }
+}
