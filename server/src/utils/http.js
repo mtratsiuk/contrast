@@ -6,10 +6,10 @@ const TIMEOUT = 5000
 const request = async (url, { method, data, headers }) => {
   if (data != null) {
     data = JSON.stringify(data)
-    headers = Object.assign({}, headers, headers = Object.assign({}, headers, {
+    headers = Object.assign({}, headers, {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
-    }))
+    })
   }
 
   let response
