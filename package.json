@@ -2,7 +2,7 @@
   "name": "contrast",
   "version": "0.0.1",
   "scripts": {
-    "start": "docker-compose build && docker-compose up -d"
+    "start": "docker-compose build --force-rm --no-cache --pull && docker-compose up -d"
   },
   "author": "Mihail Tratsiuk",
   "license": "MIT",

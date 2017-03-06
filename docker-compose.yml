@@ -3,7 +3,11 @@ version: '3'
 services:
 
   server:
-    build: ./server
+    build:
+      context: .
+      dockerfile: ./server/Dockerfile
+      args:
+        - CONTRAST_SERVER_STATIC_PATH
     ports:
       - "80:$CONTRAST_SERVER_PORT"
     env_file:
@@ -11,7 +15,8 @@ services:
 
   couch:
     build:
-      context: ./couch
+      context: .
+      dockerfile: ./couch/Dockerfile
       args:
         - CONTRAST_COUCH_SECRET
     volumes:
