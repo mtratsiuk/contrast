@@ -5,8 +5,13 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const base = require('./webpack.config')
 
-module.exports = merge(base, {
+let devConfig = merge(base, {
   devtool: 'inline-source-map',
+
+  output: {
+    path: path.resolve(__dirname, 'build'),
+    filename: '[name].bundle.js'
+  },
 
   module: {
     rules: [
@@ -23,22 +28,6 @@ module.exports = merge(base, {
     ]
   },
 
-  plugins: [
-    new ExtractTextPlugin('app.css'),
-    new webpack.optimize.CommonsChunkPlugin({
-      names: ['lib', 'polyfill'],
-      minChunks: Infinity
-    }),
-    new HtmlWebpackPlugin({
-      template: 'src/index.ejs'
-    }),
-    new webpack.DefinePlugin({
-      '_': 'lodash/fp',
-      '__DEV__': JSON.stringify(true),
-      '__VERSION__': JSON.stringify(require('../package.json').version)
-    })
-  ],
-
   devServer: {
     proxy: {
       '/api': `http://localhost:${process.env.CONTRAST_SERVER_PORT}`
@@ -48,3 +37,17 @@ module.exports = merge(base, {
     historyApiFallback: true
   }
 })
+
+devConfig.plugins.push(...[
+  new HtmlWebpackPlugin({
+    template: 'src/index.ejs'
+  }),
+
+  new webpack.DefinePlugin({
+    '_': 'lodash/fp',
+    '__DEV__': JSON.stringify(true),
+    '__VERSION__': JSON.stringify(require('./package.json').version)
+  })
+])
+
+module.exports = devConfig

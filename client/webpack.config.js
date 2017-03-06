@@ -1,4 +1,7 @@
 const path = require('path')
+const webpack = require('webpack')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 
 module.exports = {
   context: __dirname,
@@ -28,7 +31,7 @@ module.exports = {
 
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: '[name].bundle.[chunkhash].js'
+    filename: 'static/[name].bundle.[chunkhash].js'
   },
 
   module: {
@@ -47,5 +50,18 @@ module.exports = {
         ]
       }
     ]
-  }
+  },
+
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+      names: ['lib', 'polyfill'],
+      minChunks: Infinity
+    }),
+
+    new ExtractTextPlugin('static/app.css'),
+
+    new webpack.NoEmitOnErrorsPlugin(),
+
+    new ProgressBarPlugin()
+  ]
 }
