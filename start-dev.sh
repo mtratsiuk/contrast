@@ -10,4 +10,6 @@ fi
 export $(cat .env | xargs)
 export CONTRAST_COUCH_HOST=localhost
 
-node --debug server/src/app.js
+node --debug server/src/app.js & \
+     ./client/node_modules/.bin/webpack-dev-server --config ./client/webpack.config.dev.js --hot --inline && \
+     fg
