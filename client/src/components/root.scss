@@ -1,0 +1,22 @@
+@import "~normalize.css";
+@import "~material-components-web/material-components-web";
+
+html {
+  box-sizing: border-box;
+
+  *, *:before, *:after {
+    box-sizing: inherit;
+  }
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+}
+
+.Root {
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}

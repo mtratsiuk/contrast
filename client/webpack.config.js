@@ -7,21 +7,7 @@ module.exports = {
   context: __dirname,
 
   entry: {
-    app: './src/app.js',
-    lib: [
-      'lodash/fp',
-      'react',
-      'react-dom',
-      'react-redux',
-      'redux',
-      'redux-thunk'
-    ],
-    polyfill: [
-      'core-js/fn/object/assign',
-      'promise-polyfill',
-      'regenerator-runtime',
-      'whatwg-fetch'
-    ]
+    app: './src/app.js'
   },
 
   resolve: {
@@ -31,7 +17,7 @@ module.exports = {
 
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: 'static/[name].bundle.[chunkhash].js'
+    filename: 'static/[name].[chunkhash].js'
   },
 
   module: {
@@ -39,12 +25,13 @@ module.exports = {
       {
         test: /\.jsx?$/,
         include: [
-          path.resolve(__dirname, 'src')
+          path.resolve(__dirname, 'src'),
+          path.resolve(__dirname, 'node_modules/@material')
         ],
         loader: 'babel-loader'
       },
       {
-        test: /\.less$/,
+        test: /\.scss$/,
         include: [
           path.resolve(__dirname, 'src')
         ]
@@ -54,8 +41,10 @@ module.exports = {
 
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
-      names: ['lib', 'polyfill'],
-      minChunks: Infinity
+      name: 'lib',
+      minChunks: module => {
+        return module.context && module.context.indexOf('node_modules') !== -1
+      }
     }),
 
     new ExtractTextPlugin('static/app.css'),

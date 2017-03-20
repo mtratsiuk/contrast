@@ -1,27 +1,19 @@
 import './polyfills'
+import 'expose-loader?_!lodash/fp'
+
 import React from 'react'
 import { render } from 'react-dom'
-import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
-import thunk from 'redux-thunk'
+import { ConnectedRouter } from 'react-router-redux'
 
-import * as reducers from 'reducers'
-import Hello from 'components/hello'
-
-const composeEnhancers = !__DEV__
-  ? compose
-  : window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-
-const store = createStore(
-  combineReducers({ ...reducers }),
-  composeEnhancers(
-    applyMiddleware(thunk)
-  )
-)
+import store, { history } from './store'
+import Root from 'components/root'
 
 render(
   <Provider store={store}>
-    <Hello />
+    <ConnectedRouter history={history}>
+      <Root />
+    </ConnectedRouter>
   </Provider>,
   document.getElementById('root')
 )

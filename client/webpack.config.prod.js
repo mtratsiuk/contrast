@@ -1,9 +1,8 @@
 const { merge } = require('lodash')
 const webpack = require('webpack')
+const path = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CleanCSSPlugin = require('less-plugin-clean-css')
-const AutoprefixPlugin = require('less-plugin-autoprefix')
 const base = require('./webpack.config')
 
 let prodConfig = merge(base, {
@@ -13,18 +12,24 @@ let prodConfig = merge(base, {
         test: /\.jsx?$/
       },
       {
-        test: /\.less$/,
+        test: /\.scss$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: [
             'css-loader',
             {
-              loader: 'less-loader',
+              loader: 'postcss-loader',
               options: {
-                lessPlugins: [
-                  new AutoprefixPlugin({ browsers: ['last 2 versions'] }),
-                  new CleanCSSPlugin({ advanced: true })
+                plugins: () => [
+                  require('postcss-clean')(),
+                  require('autoprefixer')({ browsers: 'last 2 versions' })
                 ]
+              }
+            },
+            {
+              loader: 'sass-loader',
+              options: {
+                includePaths: [path.join(__dirname, 'node_modules')]
               }
             }
           ]
@@ -36,7 +41,6 @@ let prodConfig = merge(base, {
 
 prodConfig.plugins.push(...[
   new webpack.DefinePlugin({
-    '_': 'lodash/fp',
     'process.env.NODE_ENV': JSON.stringify('production'),
     '__DEV__': JSON.stringify(false),
     '__VERSION__': JSON.stringify(require('./package.json').version)

@@ -1,7 +1,6 @@
 const { merge } = require('lodash')
 const webpack = require('webpack')
 const path = require('path')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const base = require('./webpack.config')
 
@@ -10,7 +9,7 @@ let devConfig = merge(base, {
 
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: '[name].bundle.js'
+    filename: 'static/[name].js'
   },
 
   module: {
@@ -19,11 +18,25 @@ let devConfig = merge(base, {
         test: /\.jsx?$/
       },
       {
-        test: /\.less$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader', 'less-loader']
-        })
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+              importLoaders: 1
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+              outputStyle: 'verbose',
+              includePaths: [path.join(__dirname, 'node_modules')]
+            }
+          }
+        ]
       }
     ]
   },
@@ -44,7 +57,6 @@ devConfig.plugins.push(...[
   }),
 
   new webpack.DefinePlugin({
-    '_': 'lodash/fp',
     '__DEV__': JSON.stringify(true),
     '__VERSION__': JSON.stringify(require('./package.json').version)
   })
