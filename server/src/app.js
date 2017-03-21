@@ -2,8 +2,9 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
 const path = require('path')
+global.fetch = require('node-fetch')
 
-const logger = require('./utils/logger')
+const logger = require('./shared/logger')
 const routes = require('./routes')
 const errorHandler = require('./middlewares/error-handling')
 

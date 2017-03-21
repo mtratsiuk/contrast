@@ -1,4 +1,3 @@
-const fetch = require('node-fetch')
 const { ContrastError } = require('./error')
 
 const TIMEOUT = 5000

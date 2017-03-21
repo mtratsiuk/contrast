@@ -2,8 +2,8 @@ const express = require('express')
 const proxy = require('express-http-proxy')
 const router = express.Router()
 
-const http = require('./utils/http')
-const logger = require('./utils/logger')
+const http = require('./shared/http')
+const logger = require('./shared/logger')
 
 const couchService = require('./services/couch')({ http, logger })
 const couch = require('./controllers/couch')({ couch: couchService })

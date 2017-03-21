@@ -10,7 +10,9 @@ WORKDIR $STATIC_TMP_PATH
 
 COPY client/package.json $STATIC_TMP_PATH
 RUN npm install
+
 COPY client/. $STATIC_TMP_PATH
+COPY shared $STATIC_TMP_PATH/src/shared
 RUN npm run build && \
     cp -R build $CONTRAST_SERVER_STATIC_PATH
 
@@ -22,6 +24,7 @@ COPY server/package.json $SERVER_PATH
 RUN npm install
 
 COPY server/. $SERVER_PATH
+COPY shared $SERVER_PATH/src/shared
 
 EXPOSE 8080
 CMD ["node", "src/app.js"]

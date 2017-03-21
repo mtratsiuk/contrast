@@ -12,6 +12,7 @@
   "standard": {
     "globals": [
       "_",
+      "fetch",
       "__DEV__",
       "__VERSION__"
     ]

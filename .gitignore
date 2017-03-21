@@ -5,3 +5,5 @@ npm-debug.log
 .env
 
 build
+server/src/shared
+client/src/shared
