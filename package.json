@@ -7,7 +7,6 @@
   "author": "Mihail Tratsiuk",
   "license": "MIT",
   "devDependencies": {
-    "expose-loader": "^0.7.3",
     "standard": "^8.6.0"
   },
   "standard": {
