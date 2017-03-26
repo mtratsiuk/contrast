@@ -4,7 +4,11 @@ import classnames from 'classnames'
 
 class Button extends React.PureComponent {
   componentDidMount () {
-    MDCRipple.attachTo(this.element)
+    this._mdcRipple = new MDCRipple(this.element)
+  }
+
+  componentWillUnmount () {
+    this._mdcRipple.destroy()
   }
 
   render () {

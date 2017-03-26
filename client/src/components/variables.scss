@@ -1,0 +1,14 @@
+$tablet-bp: map-get($mdc-layout-grid-breakpoints, desktop);
+$mobile-bp: map-get($mdc-layout-grid-breakpoints, tablet);
+
+@mixin tablet {
+  @media screen and (max-width: $tablet-bp) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media screen and (max-width: $mobile-bp) {
+    @content;
+  }
+}

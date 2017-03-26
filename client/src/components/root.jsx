@@ -2,21 +2,18 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Route, Redirect, Switch } from 'react-router'
 
-import './root.scss'
+require('./root.scss')
+
 import Layout from 'components/layout'
 import Auth from 'components/auth'
 
 const Root = ({ isLoggedIn, location }) =>
-  <main className='Root mdc-typography'>
-    <Switch>
-      <Route path='/login' component={Auth} />
-      <Route path='/signup' component={Auth} />
-      {!isLoggedIn
-        ? <Redirect to={{ pathname: '/login', state: { from: location } }} />
-        : <Route path='/' component={Layout} />
-      }
-    </Switch>
-  </main>
+  <Switch>
+    {isLoggedIn && <Route path='/' component={Layout} />}
+    <Route path='/login' component={Auth} />
+    <Route path='/signup' component={Auth} />
+    <Redirect to={{ pathname: '/login', state: { from: location } }} />
+  </Switch>
 
 const mapStateToProps = state => ({
   isLoggedIn: !!state.user,

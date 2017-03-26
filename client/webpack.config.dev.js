@@ -33,7 +33,10 @@ let devConfig = merge(base, {
             options: {
               sourceMap: true,
               outputStyle: 'verbose',
-              includePaths: [path.join(__dirname, 'node_modules')]
+              includePaths: [
+                path.join(__dirname, 'node_modules'),
+                path.join(__dirname, 'src')
+              ]
             }
           }
         ]

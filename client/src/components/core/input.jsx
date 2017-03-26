@@ -12,11 +12,15 @@ class Input extends React.PureComponent {
 
   componentDidMount () {
     let { dispatch, model, value } = this.props
-    MDCTextfield.attachTo(this.element)
+    this._mdcTextfield = new MDCTextfield(this.element)
 
     if (value) {
       dispatch(setInput(model, value, false))
     }
+  }
+
+  componentWillUnmount () {
+    this._mdcTextfield.destroy()
   }
 
   handleChange (event) {

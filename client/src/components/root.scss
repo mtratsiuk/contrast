@@ -1,5 +1,6 @@
 @import "~normalize.css";
 @import "~material-components-web/material-components-web";
+@import "components/variables";
 
 html {
   box-sizing: border-box;
@@ -14,9 +15,5 @@ html, body, #root {
   height: 100%;
 }
 
-.Root {
-  width: 100%;
-  min-height: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
+@import "components/core/sidenav/sidenav";
+@import "components/layout/layout";

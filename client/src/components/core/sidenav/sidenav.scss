@@ -1,0 +1,18 @@
+.Sidenav {
+  height: 100%;
+
+  &__temporary {
+    display: none;
+
+    @include mobile {
+      display: block;
+    }
+  }
+
+  &__permanent {
+
+    @include mobile {
+      display: none;
+    }
+  }
+}
