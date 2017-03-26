@@ -2,31 +2,50 @@ import React from 'react'
 import { connect } from 'react-redux'
 import classnames from 'classnames'
 import { MDCTextfield } from '@material/textfield'
-import { setInput } from 'actions/forms'
+import { setInput, validateInput } from 'actions/forms'
 
 class Input extends React.PureComponent {
   constructor (props) {
     super(props)
     this.handleChange = this.handleChange.bind(this)
+    this.validate = this.validate.bind(this)
   }
 
   componentDidMount () {
     let { dispatch, model, value } = this.props
     this._mdcTextfield = new MDCTextfield(this.element)
 
-    if (value) {
-      dispatch(setInput(model, value, false))
-    }
+    dispatch(setInput(model, value, !this.validate()))
   }
 
   componentWillUnmount () {
     this._mdcTextfield.destroy()
   }
 
-  handleChange (event) {
+  componentWillReceiveProps (nextProps) {
+    let { dispatch } = this.props
+
+    if (this.props.form !== nextProps.form &&
+      nextProps.form.lastChanged &&
+      nextProps.form.lastChanged !== nextProps.model) {
+      let isValid = this.validate(nextProps.form)
+      if (!nextProps.invalid !== isValid) {
+        dispatch(validateInput(nextProps.model, !isValid))
+      }
+    }
+  }
+
+  handleChange () {
     let { dispatch, model } = this.props
-    let element = event.target
-    dispatch(setInput(model, element.value, !element.checkValidity()))
+    let value = this.inputElement.value
+    this._dirty = true
+    dispatch(setInput(model, value, !this.validate()))
+  }
+
+  validate (nextForm) {
+    let isValid = this.props.validate(this.inputElement.value, nextForm || this.props.form)
+    this.inputElement.setCustomValidity(isValid ? '' : 'Error')
+    return isValid
   }
 
   render () {
@@ -34,10 +53,11 @@ class Input extends React.PureComponent {
       type,
       helpText,
       errorText,
-      validation,
       model,
       label,
-      value
+      value,
+      invalid,
+      required
     } = this.props
 
     let inputId = model
@@ -49,17 +69,25 @@ class Input extends React.PureComponent {
       }
     )
 
+    let textfieldClassname = classnames(
+      'mdc-textfield',
+      'mdc-textfield--upgraded', {
+        'mdc-textfield--invalid': invalid && this._dirty && this._blurred
+      })
+
     return (
       <div className='Input'>
-        <div className='mdc-textfield' ref={el => { this.element = el }}>
+        <div className={textfieldClassname} ref={el => { this.element = el }}>
           <input
-            {...validation}
             onChange={this.handleChange}
-            value={value || ''}
+            onBlur={() => { this._blurred = true }}
+            value={value}
             type={type}
             className='mdc-textfield__input'
             id={inputId}
             aria-controls={helperId}
+            ref={el => { this.inputElement = el }}
+            required={required}
           />
           <label
             htmlFor={inputId}
@@ -75,6 +103,14 @@ class Input extends React.PureComponent {
   }
 }
 
-const mapStateToProps = (state, ownProps) => _.get(`forms.${ownProps.model}`, state) || {}
+Input.defaultProps = {
+  validate: () => true
+}
+
+const mapStateToProps = (state, ownProps) => ({
+  value: _.get(`forms.${ownProps.model}.value`, state) || '',
+  invalid: _.get(`forms.${ownProps.model}.invalid`, state),
+  form: _.get(`forms.${ownProps.model.split('.')[0]}`, state)
+})
 
 export default connect(mapStateToProps)(Input)

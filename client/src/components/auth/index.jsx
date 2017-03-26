@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Auth = () =>
+const Auth = ({ children }) =>
   <div className='Auth'>
-    Auth page
+    <div className='Auth__form'>{children}</div>
   </div>
 
 export default Auth

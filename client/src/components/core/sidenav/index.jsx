@@ -35,7 +35,7 @@ class Sidenav extends React.PureComponent {
   }
 
   render () {
-    let { username, children } = this.props
+    let { header, children } = this.props
 
     return (
       <div className='Sidenav'>
@@ -43,7 +43,7 @@ class Sidenav extends React.PureComponent {
           <nav className='mdc-temporary-drawer__drawer' onClick={event => event.stopPropagation()}>
             <header className='mdc-temporary-drawer__header'>
               <div className='mdc-temporary-drawer__header-content mdc-theme--primary-bg mdc-theme--text-primary-on-primary'>
-                {username}
+                {header}
               </div>
             </header>
             {children}

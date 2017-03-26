@@ -26,7 +26,7 @@ const Layout = ({
       </header>
 
       <div className='Layout__sidenav mdc-toolbar-fixed-adjust'>
-        <Sidenav ref={el => { sidenav = el }} username={username}>
+        <Sidenav ref={el => { sidenav = el }} header={username}>
           <nav className='mdc-list'>
             {
               _.map(route =>
@@ -64,7 +64,7 @@ const Layout = ({
 export default connect(
   state => ({
     location: state.router.location,
-    username: state.user.username,
+    username: _.get('user.name', state),
     title: (_.find(
       route => _.startsWith(route.path, state.router.location.pathname),
       appRoutes

@@ -6,12 +6,12 @@ require('./root.scss')
 
 import Layout from 'components/layout'
 import Auth from 'components/auth'
+import Signup from 'components/auth/signup'
 
 const Root = ({ isLoggedIn, location }) =>
   <Switch>
-    {isLoggedIn && <Route path='/' component={Layout} />}
-    <Route path='/login' component={Auth} />
-    <Route path='/signup' component={Auth} />
+    {isLoggedIn ? <Route path='/' component={Layout} /> : <Route path='/login' component={Auth} />}
+    <Route path='/signup' component={Signup} />
     <Redirect to={{ pathname: '/login', state: { from: location } }} />
   </Switch>
 
