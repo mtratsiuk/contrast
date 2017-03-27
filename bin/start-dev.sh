@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd "${0%/*}"
+
 couch=contrast-dev/couchdb
 
 if [[ !(-e node_modules) ]]; then
