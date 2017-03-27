@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import classnames from 'classnames'
 import { MDCTextfield } from '@material/textfield'
-import { setInput, validateInput } from 'actions/forms'
+import { setInput, setInputValidation } from 'actions/forms'
 
 class Input extends React.PureComponent {
   constructor (props) {
@@ -30,7 +30,7 @@ class Input extends React.PureComponent {
       nextProps.form.lastChanged !== nextProps.model) {
       let isValid = this.validate(nextProps.form)
       if (!nextProps.invalid !== isValid) {
-        dispatch(validateInput(nextProps.model, !isValid))
+        dispatch(setInputValidation(nextProps.model, !isValid))
       }
     }
   }
@@ -57,7 +57,8 @@ class Input extends React.PureComponent {
       label,
       value,
       invalid,
-      required
+      required,
+      form
     } = this.props
 
     let inputId = model
@@ -72,7 +73,7 @@ class Input extends React.PureComponent {
     let textfieldClassname = classnames(
       'mdc-textfield',
       'mdc-textfield--upgraded', {
-        'mdc-textfield--invalid': invalid && this._dirty && this._blurred
+        'mdc-textfield--invalid': invalid && (form.submitted || (this._dirty && this._blurred))
       })
 
     return (
@@ -80,7 +81,7 @@ class Input extends React.PureComponent {
         <div className={textfieldClassname} ref={el => { this.element = el }}>
           <input
             onChange={this.handleChange}
-            onBlur={() => { this._blurred = true }}
+            onBlur={() => { this._blurred = true; this._dirty = true }}
             value={value}
             type={type}
             className='mdc-textfield__input'

@@ -2,11 +2,13 @@
   "name": "contrast",
   "version": "0.0.1",
   "scripts": {
-    "start": "docker-compose build --force-rm --no-cache --pull && docker-compose up -d"
+    "start": "docker-compose build --force-rm --no-cache --pull && docker-compose up -d",
+    "test": "standard"
   },
   "author": "Mihail Tratsiuk",
   "license": "MIT",
   "devDependencies": {
+    "pre-commit": "^1.2.2",
     "standard": "^8.6.0"
   },
   "standard": {
@@ -16,5 +18,8 @@
       "__DEV__",
       "__VERSION__"
     ]
-  }
+  },
+  "pre-commit": [
+    "test"
+  ]
 }

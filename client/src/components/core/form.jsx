@@ -5,7 +5,7 @@ class Form extends React.PureComponent {
     let { onSubmit, className, children } = this.props
 
     return (
-      <form className={className} onSubmit={event => {
+      <form noValidate className={className} onSubmit={event => {
         event.preventDefault()
         onSubmit && onSubmit(event)
         return false

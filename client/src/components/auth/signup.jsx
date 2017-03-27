@@ -1,12 +1,17 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import { setFormSubmitted } from 'actions/forms'
+import { signup } from 'actions/user'
+
 import Auth from 'components/auth'
 import Form from 'components/core/form'
 import Input from 'components/core/input'
+import Button from 'components/core/button'
 
 const Signup = ({
-  form
+  form,
+  dispatch
 }) =>
   <Auth>
     <Form model='signup'>
@@ -23,6 +28,7 @@ const Signup = ({
         model='signup.password'
         type='password'
         label='Password'
+        validate={value => !!value.length}
         required
       />
       <Input
@@ -33,6 +39,15 @@ const Signup = ({
         errorText='Passwords do not match'
         required
       />
+      <Button
+        primary
+        onClick={() => {
+          if (form.invalid) dispatch(setFormSubmitted('signup'))
+          let { name, password } = form
+          dispatch(signup(name.value, password.value))
+        }}>
+        Sign Up
+      </Button>
     </Form>
   </Auth>
 

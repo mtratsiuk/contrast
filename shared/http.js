@@ -18,6 +18,7 @@ const request = async (url, { method, data, headers }) => {
       method,
       headers,
       body: data,
+      credentials: 'include',
       timeout: TIMEOUT
     })
   } catch (error) {
@@ -39,31 +40,31 @@ const request = async (url, { method, data, headers }) => {
   return { response, data: responseData }
 }
 
-const get = async (url, headers) => await request(url, {
+const get = (url, headers) => request(url, {
   method: 'GET',
   headers
 })
 
-const post = async (url, data, headers) => await request(url, {
+const post = (url, data, headers) => request(url, {
   method: 'POST',
   data,
   headers
 })
 
-const put = async (url, data, headers) => await request(url, {
+const put = (url, data, headers) => request(url, {
   method: 'PUT',
   data,
   headers
 })
 
-const del = async (url, data, headers) => await request(url, {
+const del = (url, data, headers) => request(url, {
   method: 'DELETE',
   data,
   headers
 })
 
-const withBasicAuth = (name, password, request) => async (url, data, headers) =>
-  await request(url, data, Object.assign({}, headers, {
+const withBasicAuth = (name, password, request) => (url, data, headers) =>
+  request(url, data, Object.assign({}, headers, {
     'Authorization': 'Basic ' + Buffer.from(`${name}:${password}`).toString('base64')
   }))
 

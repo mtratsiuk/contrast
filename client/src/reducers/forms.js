@@ -17,6 +17,9 @@ const forms = (state = {}, action) => {
       setFormValidation(nextState[form])
       return nextState
     }
+    case 'FORMS.SET_FORM_SUBMITTED': {
+      return _.set(`${action.model}.submitted`, true, state)
+    }
   }
   return state
 }
