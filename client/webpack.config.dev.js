@@ -61,7 +61,7 @@ devConfig.plugins.push(...[
 
   new webpack.DefinePlugin({
     '__DEV__': JSON.stringify(true),
-    '__VERSION__': JSON.stringify(require('../package.json').version)
+    '__VERSION__': JSON.stringify(require('./package.json').version)
   })
 ])
 
