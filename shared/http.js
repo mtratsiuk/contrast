@@ -30,7 +30,7 @@ const request = async (url, { method, data, headers }) => {
   try {
     responseData = await response.json()
   } catch (error) {
-    throw new ContrastError('Http utils: bad response format', response.status, error)
+    responseData = null
   }
 
   if (response.status >= 400) {
