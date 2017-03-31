@@ -6,7 +6,7 @@ const log = (level, message) => {
 
 const info = message => log('info', message)
 
-const warning = message => log('warning', message)
+const warning = message => log('warn', message)
 
 const error = message => log('error', message)
 
