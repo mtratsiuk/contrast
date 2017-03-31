@@ -3,13 +3,16 @@ import { connect } from 'react-redux'
 import { Route, Switch, Redirect } from 'react-router'
 import { NavLink } from 'react-router-dom'
 
+import { logout } from 'actions/user'
 import appRoutes from 'components/app-routes'
 import Sidenav from 'components/core/sidenav'
+import SimpleMenu from 'components/core/simple-menu'
 
 const Layout = ({
   location,
   title,
-  username
+  username,
+  dispatch
 }) => {
   let sidenav
 
@@ -22,6 +25,13 @@ const Layout = ({
         </section>
         <section className='mdc-toolbar__section mdc-toolbar__section--align-start'>
           <span className='mdc-toolbar__title'>{title}</span>
+        </section>
+        <section className='mdc-toolbar__section mdc-toolbar__section--align-end'>
+          <SimpleMenu
+            options={[
+              { title: 'Log Out', action: () => dispatch(logout()) }
+            ]}
+          />
         </section>
       </header>
 
@@ -47,7 +57,7 @@ const Layout = ({
       </div>
 
       <main className='Layout__content mdc-toolbar-fixed-adjust'>
-        <Switch>
+        <Switch location={location}>
           {
             _.pipe(
               _.map(route => <Route key={route.path} {...route} />),

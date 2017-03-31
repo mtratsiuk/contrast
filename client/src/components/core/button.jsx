@@ -19,22 +19,26 @@ class Button extends React.PureComponent {
       primary,
       accent,
       onClick,
+      className,
+      style,
       children
     } = this.props
 
-    let className = classnames('mdc-button', {
+    let buttonClassName = classnames('mdc-button', {
       'mdc-button--raised': raised,
       'mdc-button--dense': dense,
       'mdc-button--compact': compact,
       'mdc-button--primary': primary,
-      'mdc-button--accent': accent
+      'mdc-button--accent': accent,
+      [className]: className
     })
 
     return (
       <button
         ref={el => { this.element = el }}
-        className={className}
-        onClick={onClick}>
+        className={buttonClassName}
+        onClick={onClick}
+        style={style}>
         {children}
       </button>
     )

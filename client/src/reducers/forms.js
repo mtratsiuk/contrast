@@ -8,7 +8,6 @@ const forms = (state = {}, action) => {
       let form = action.model.split('.')[0]
       let nextState = _.set(action.model, action.payload, state)
       setFormValidation(nextState[form])
-      nextState[form].lastChanged = action.model
       return nextState
     }
     case 'FORMS.SET_INPUT_VALIDATION': {
@@ -18,7 +17,7 @@ const forms = (state = {}, action) => {
       return nextState
     }
     case 'FORMS.SET_FORM_SUBMITTED': {
-      return _.set(`${action.model}.submitted`, true, state)
+      return _.set(`${action.model}.submitted`, action.payload, state)
     }
   }
   return state

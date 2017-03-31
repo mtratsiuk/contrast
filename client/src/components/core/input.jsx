@@ -19,15 +19,18 @@ class Input extends React.PureComponent {
   }
 
   componentWillUnmount () {
+    let { type, model, dispatch } = this.props
+
     this._mdcTextfield.destroy()
+    if (type === 'password') {
+      dispatch(setInput(model, ''))
+    }
   }
 
   componentWillReceiveProps (nextProps) {
     let { dispatch } = this.props
 
-    if (this.props.form !== nextProps.form &&
-      nextProps.form.lastChanged &&
-      nextProps.form.lastChanged !== nextProps.model) {
+    if (this.props.form !== nextProps.form) {
       let isValid = this.validate(nextProps.form)
       if (!nextProps.invalid !== isValid) {
         dispatch(setInputValidation(nextProps.model, !isValid))

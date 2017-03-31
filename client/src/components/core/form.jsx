@@ -1,6 +1,13 @@
 import React from 'react'
 
+import store from 'store'
+import { setFormSubmitted } from 'actions/forms'
+
 class Form extends React.PureComponent {
+  componentWillUnmount () {
+    store.dispatch(setFormSubmitted(this.props.model, false))
+  }
+
   render () {
     let { onSubmit, className, children } = this.props
 

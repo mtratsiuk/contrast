@@ -4,4 +4,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  &__submit-btn {
+    margin-top: 15px;
+  }
+
+  &__other-btn {
+    margin-top: 10px;
+  }
 }

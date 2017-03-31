@@ -15,8 +15,9 @@ export const setInputValidation = (model, invalid) => ({
   }
 })
 
-export const setFormSubmitted = model => ({
+export const setFormSubmitted = (model, value = true) => ({
   type: 'FORMS.SET_FORM_SUBMITTED',
-  model
+  model,
+  payload: value
 })
 
