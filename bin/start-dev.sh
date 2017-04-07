@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd "${0%/*}"
+cd "${0%/*}/.."
 
 couch=contrast-dev/couchdb
 

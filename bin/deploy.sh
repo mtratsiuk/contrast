@@ -1,8 +1,7 @@
 #!/bin/bash
 
-cd "${0%/*}"
+cd "${0%/*}/.."
 
-cd ..
 npm test
 version=$(npm --no-git-tag-version version patch)
 cd client && npm --no-git-tag-version version patch && cd ..
