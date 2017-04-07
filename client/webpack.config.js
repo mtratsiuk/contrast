@@ -47,7 +47,7 @@ module.exports = {
       }
     }),
 
-    new ExtractTextPlugin('static/app.css'),
+    new ExtractTextPlugin('static/app.[contenthash].css'),
 
     new webpack.NoEmitOnErrorsPlugin(),
 
