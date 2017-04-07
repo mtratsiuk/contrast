@@ -19,7 +19,7 @@ const store = createStore(
     applyMiddleware(
       errorHandlingMiddleware,
       thunk,
-      __DEV__ ? loggingMiddleware : () => {},
+      loggingMiddleware,
       routerMiddleware(history)
     )
   )
