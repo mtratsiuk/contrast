@@ -11,7 +11,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['.js', '.jsx', '.scss'],
+    extensions: ['.js', '.jsx', '.scss', '.json'],
     modules: [path.resolve(__dirname, 'src'), 'node_modules']
   },
 
@@ -35,6 +35,13 @@ module.exports = {
         include: [
           path.resolve(__dirname, 'src')
         ]
+      },
+      {
+        test: /\.json$/,
+        include: [
+          path.resolve(__dirname, 'src')
+        ],
+        use: 'json-loader'
       }
     ]
   },
