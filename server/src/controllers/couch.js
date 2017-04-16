@@ -23,9 +23,12 @@ module.exports = ({ couch }) => {
     }
   }
 
+  const welcome = (req, res, next) => res.json({})
+
   return {
     signup,
     login,
-    logout
+    logout,
+    welcome
   }
 }

@@ -18,7 +18,8 @@ app.use(cookieParser())
 app.use('/api', routes)
 
 app.use('/static', express.static(`${STATIC_PATH}/static`, {
-  maxAge: '1y'
+  maxAge: '1y',
+  fallthrough: false
 }))
 
 app.get('*', (req, res) => {

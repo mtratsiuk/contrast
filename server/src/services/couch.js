@@ -1,9 +1,9 @@
 module.exports = ({ http, logger }) => {
   const COUCH_URL = `http://${process.env.CONTRAST_COUCH_HOST}:5984`
+  const withAuth = http.withBasicAuth(process.env.COUCHDB_USER, process.env.COUCHDB_PASSWORD)
 
   const signup = async (name, password) => {
-    let authPut = http.withBasicAuth(process.env.COUCHDB_USER, process.env.COUCHDB_PASSWORD, http.put)
-    await authPut(`${COUCH_URL}/_users/org.couchdb.user:${name}`, {
+    await withAuth(http.put, `${COUCH_URL}/_users/org.couchdb.user:${name}`, {
       name,
       password,
       roles: [],
@@ -14,8 +14,7 @@ module.exports = ({ http, logger }) => {
   }
 
   const login = async (name, password) => {
-    let authPost = http.withBasicAuth(process.env.COUCHDB_USER, process.env.COUCHDB_PASSWORD, http.post)
-    let { response, data } = await authPost(`${COUCH_URL}/_session`, { name, password })
+    let { response, data } = await withAuth(http.post, `${COUCH_URL}/_session`, { name, password })
 
     return {
       authCookie: response.headers.get('Set-Cookie'),

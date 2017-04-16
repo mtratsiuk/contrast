@@ -40,7 +40,7 @@ const request = async (url, { method, data, headers }) => {
   return { response, data: responseData }
 }
 
-const get = (url, headers) => request(url, {
+const get = (url, data, headers) => request(url, {
   method: 'GET',
   headers
 })
@@ -63,7 +63,7 @@ const del = (url, data, headers) => request(url, {
   headers
 })
 
-const withBasicAuth = (name, password, request) => (url, data, headers) =>
+const withBasicAuth = (name, password) => (request, url, data, headers) =>
   request(url, data, Object.assign({}, headers, {
     'Authorization': 'Basic ' + Buffer.from(`${name}:${password}`).toString('base64')
   }))
