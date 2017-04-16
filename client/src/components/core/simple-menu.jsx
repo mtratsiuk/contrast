@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { MDCSimpleMenu } from '@material/menu'
 
 import Button from 'components/core/button'
@@ -70,10 +71,10 @@ SimpleMenu.defaultProps = {
 }
 
 SimpleMenu.propTypes = {
-  children: React.PropTypes.element,
-  options: React.PropTypes.arrayOf(React.PropTypes.shape({
-    title: React.PropTypes.string.isRequired,
-    action: React.PropTypes.func
+  children: PropTypes.element,
+  options: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    action: PropTypes.func
   })).isRequired
 }
 
