@@ -1,29 +1,29 @@
-import * as contrast from 'services/contrast'
-import * as storage from 'utils/storage'
+import contrast from 'services/contrast'
+import user from 'services/user'
 
-export const signup = (name, password) => async dispatch => {
-  let { data } = await contrast.signup(name, password)
-  storage.set('user', data)
-  dispatch({
+const _login = (data, dispatch) => {
+  user.login(data)
+  return dispatch({
     type: 'USER.LOGIN',
     payload: data
   })
 }
 
+export const signup = (name, password) => async dispatch => {
+  let { data } = await contrast.signup(name, password)
+  return _login(data, dispatch)
+}
+
 export const login = (name, password) => async dispatch => {
   let { data } = await contrast.login(name, password)
-  storage.set('user', data)
-  dispatch({
-    type: 'USER.LOGIN',
-    payload: data
-  })
+  return _login(data, dispatch)
 }
 
 export const logout = () => async dispatch => {
   try {
     await contrast.logout()
   } finally {
-    storage.clear()
+    user.logout()
     dispatch({ type: 'USER.LOGOUT' })
   }
 }

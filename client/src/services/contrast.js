@@ -7,3 +7,9 @@ export const signup = (name, password) => http.post(`${BASE_URL}/signup`, { name
 export const login = (name, password) => http.post(`${BASE_URL}/login`, { name, password })
 
 export const logout = () => http.post(`${BASE_URL}/logout`)
+
+export default {
+  signup,
+  login,
+  logout
+}

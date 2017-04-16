@@ -1,6 +1,6 @@
-import { get } from 'utils/storage'
+import userService from 'services/user'
 
-const user = (state = get('user'), action) => {
+const user = (state = userService.getData(), action) => {
   switch (action.type) {
     case 'USER.LOGIN':
       return action.payload
