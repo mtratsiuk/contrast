@@ -2,8 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Route, Redirect, Switch } from 'react-router'
 
-require('./root.scss')
-
+import './root.scss'
 import Layout from 'components/layout'
 import Login from 'components/auth/login'
 import Signup from 'components/auth/signup'
