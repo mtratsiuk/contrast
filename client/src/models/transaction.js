@@ -1,10 +1,10 @@
 import base from 'models/base'
 
 export default db => {
-  class Operation extends base(db) {
+  class Transaction extends base(db) {
     constructor (data) {
       super(data)
-      this.doctype = data.doctype || 'operation'
+      this.doctype = data.doctype || 'transaction'
       this.value = data.value
       this.type = data.type
       this.currency = data.currency
@@ -17,9 +17,9 @@ export default db => {
     static async getAll () {
       return (await db.allDocs({
         include_docs: true
-      })).rows.map(({ doc }) => new Operation(doc))
+      })).rows.map(({ doc }) => new Transaction(doc))
     }
   }
 
-  return Operation
+  return Transaction
 }

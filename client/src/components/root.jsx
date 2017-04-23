@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Route, Redirect, Switch } from 'react-router'
 
 import './root.scss'
-import Layout from 'components/layout'
+import Layout from 'components/pages'
 import Login from 'components/auth/login'
 import Signup from 'components/auth/signup'
 
