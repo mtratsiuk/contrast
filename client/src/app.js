@@ -1,4 +1,3 @@
-import './polyfills'
 import 'expose-loader?_!lodash/fp'
 
 import React from 'react'

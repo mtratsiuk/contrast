@@ -12,6 +12,7 @@
     "babel-preset-env": "^1.2.0",
     "babel-preset-react": "^6.23.0",
     "babel-register": "^6.23.0",
+    "babili-webpack-plugin": "0.0.11",
     "css-loader": "^0.26.2",
     "expose-loader": "^0.7.3",
     "extract-text-webpack-plugin": "^2.1.0",
@@ -29,12 +30,10 @@
   },
   "dependencies": {
     "classnames": "~2.2.5",
-    "core-js": "~2.4.1",
     "lodash": "~4.17.4",
     "material-components-web": "~0.7.0",
     "normalize.css": "~5.0.0",
     "pouchdb": "~6.1.2",
-    "promise-polyfill": "~6.0.2",
     "prop-types": "~15.5.8",
     "react": "~15.5.4",
     "react-autocomplete": "^1.5.0",
@@ -43,9 +42,7 @@
     "react-router": "~4.1.1",
     "react-router-dom": "~4.1.1",
     "react-router-redux": "~5.0.0-alpha.6",
-    "redux": "~3.6.0",
-    "regenerator-runtime": "~0.10.3",
-    "whatwg-fetch": "~2.0.3"
+    "redux": "~3.6.0"
   },
   "babel": {
     "presets": [
@@ -54,7 +51,7 @@
         {
           "targets": {
             "browsers": [
-              "last 2 versions"
+              "last 2 Chrome versions"
             ]
           },
           "useBuiltIns": true,

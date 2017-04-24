@@ -3,6 +3,7 @@ const webpack = require('webpack')
 const path = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const BabiliPlugin = require('babili-webpack-plugin')
 const base = require('./webpack.config')
 
 let prodConfig = merge(base, {
@@ -22,7 +23,7 @@ let prodConfig = merge(base, {
               options: {
                 plugins: () => [
                   require('postcss-clean')(),
-                  require('autoprefixer')({ browsers: 'last 2 versions' })
+                  require('autoprefixer')({ browsers: 'last 2 Chrome versions' })
                 ]
               }
             },
@@ -62,18 +63,7 @@ prodConfig.plugins.push(...[
     debug: false
   }),
 
-  new webpack.optimize.UglifyJsPlugin({
-    beautify: false,
-    mangle: {
-      screw_ie8: true,
-      keep_fnames: true
-    },
-    compress: {
-      screw_ie8: true,
-      warnings: false
-    },
-    comments: false
-  })
+  new BabiliPlugin()
 ])
 
 module.exports = prodConfig
