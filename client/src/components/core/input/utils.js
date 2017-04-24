@@ -1,7 +1,8 @@
 const collator = new Intl.Collator()
 
 export const autocompleteSort = (a, b, value) => {
-  let indexDiff = a.indexOf(value) - b.indexOf(value)
+  let term = value.toLowerCase()
+  let indexDiff = a.toLowerCase().indexOf(term) - b.toLowerCase().indexOf(term)
   if (indexDiff !== 0) return indexDiff
   return collator.compare(a, b)
 }

@@ -97,7 +97,7 @@ class Input extends React.PureComponent {
 
   render () {
     let {
-            type,
+      type,
       helpText,
       errorText,
       model,
