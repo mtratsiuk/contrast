@@ -7,17 +7,14 @@
   .mdc-simple-menu__items {
     width: 100%;
     max-height: 400px;
-  }
-
-  &__autocomplete-menu {
     position: absolute;
-    width: 100%;
     left: 0;
     top: 100%;
     z-index: 1;
   }
 
   &__autocomplete-item {
+    opacity: 1;
 
     &--active.mdc-list-item:before {
       position: absolute;
