@@ -8,6 +8,7 @@ import * as userActions from 'actions/user'
 import Form from 'components/core/form'
 import Input from 'components/core/input'
 import Button from 'components/core/button'
+import Typography from 'components/core/typography'
 
 const Auth = ({
   form,
@@ -22,7 +23,9 @@ const Auth = ({
     <div className='Auth'>
       <div className='Auth__form'>
         <Form model={`${type}`}>
-          <h1 className='mdc-typography--display1'>{title}</h1>
+          <Typography type='display1'>
+            <h1>{title}</h1>
+          </Typography>
           <Input
             model={`${type}.name`}
             type='text'

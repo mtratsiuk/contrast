@@ -17,7 +17,7 @@ const Layout = ({
   let sidenav
 
   return (
-    <div className='Layout mdc-typography'>
+    <div className='Layout'>
 
       <header className='Layout__header mdc-toolbar mdc-toolbar--fixed'>
         <section className='Layout-header__menu-toggler mdc-toolbar__section mdc-toolbar__section--align-start'>

@@ -15,6 +15,11 @@ html, body, #root {
   height: 100%;
 }
 
+#root {
+  @include mdc-typography-base;
+  @include mdc-typography(body1);
+}
+
 @import "components/core/sidenav/sidenav";
 @import "components/pages/layout";
 @import "components/auth/auth";
