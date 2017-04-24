@@ -83,11 +83,12 @@ class Input extends React.PureComponent {
         renderMenu={items =>
           <div
             className='mdc-simple-menu mdc-simple-menu--open Input__autocomplete-menu'>
-            <ul
-              className='mdc-list mdc-simple-menu__items'
-            >
-              {items}
-            </ul>
+            {!!items.length &&
+              <ul
+                className='mdc-list mdc-simple-menu__items'>
+                {items}
+              </ul>
+            }
           </div>
         }
       />
@@ -96,7 +97,7 @@ class Input extends React.PureComponent {
 
   render () {
     let {
-      type,
+            type,
       helpText,
       errorText,
       model,

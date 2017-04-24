@@ -26,6 +26,15 @@ const Hello = ({ world, showHello }) =>
       errorText='User name must contain 3-8 letters'
      />
 
+    <Input
+      model='hello.autocomplete'
+      type='text'
+      label='User name autocomplete'
+      validate={value => /^[a-z]{3,8}$/i.test(value)}
+      errorText='User name must contain 3-8 letters'
+      autocomplete={['copper', 'explain', 'ill-fated', 'truck', 'neat', 'unite', 'branch', 'educated', 'tenuous', 'hum', 'decisive', 'notice']}
+     />
+
     <h5>Build version: {__VERSION__}</h5>
   </div>
 
