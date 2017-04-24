@@ -4,10 +4,10 @@ import getModels from 'models'
 let db = null
 let models = null
 
-const thunkMiddleware = ({ dispatch, getState }) => next => async action => {
+const thunkMiddleware = ({ dispatch, getState }) => next => action => {
   if (typeof action !== 'function') return next(action)
 
-  let nextDb = await pouch.getDb()
+  let nextDb = pouch.getDb()
   if (nextDb !== db) {
     db = nextDb
     models = db ? getModels(db) : null
