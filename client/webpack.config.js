@@ -54,6 +54,10 @@ module.exports = {
       }
     }),
 
+    new webpack.ProvidePlugin({
+      React: 'react'
+    }),
+
     new ExtractTextPlugin('static/app.[contenthash].css'),
 
     new webpack.NoEmitOnErrorsPlugin(),
