@@ -1,6 +1,11 @@
+import Transaction from 'components/transaction'
+
 const TransactionPage = () => {
   return (
-    <div>Transaction Page</div>
+    <div>
+      Transaction Page
+      <Transaction />
+    </div>
   )
 }
 
