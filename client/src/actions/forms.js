@@ -7,6 +7,11 @@ export const setInput = (model, value, invalid) => ({
   }
 })
 
+export const addMultiInputField = model => ({
+  type: 'FORMS.ADD_MULTIINPUT_FIELD',
+  model
+})
+
 export const setInputValidation = (model, invalid) => ({
   type: 'FORMS.SET_INPUT_VALIDATION',
   model,

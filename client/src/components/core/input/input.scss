@@ -1,7 +1,12 @@
 .Input {
 
   .mdc-textfield {
+    width: 100%;
     z-index: 1;
+  }
+
+  .mdc-textfield__input {
+    width: 100%;
   }
 
   .mdc-simple-menu__items {

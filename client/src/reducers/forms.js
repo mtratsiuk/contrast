@@ -6,8 +6,17 @@ const forms = (state = {}, action) => {
   switch (action.type) {
     case 'FORMS.SET_INPUT': {
       let form = action.model.split('.')[0]
-      let nextState = _.set(action.model, action.payload, state)
+      let nextState = _.update(action.model, input => _.merge(input, action.payload), state)
       setFormValidation(nextState[form])
+      return nextState
+    }
+    case 'FORMS.ADD_MULTIINPUT_FIELD': {
+      let [form, input] = action.model.split('.')
+      let nextState = _.update(
+        `${action.model}.fields`,
+        (fields = []) => fields.concat(`${form}.__${input}${fields.length}__`),
+        state
+      )
       return nextState
     }
     case 'FORMS.SET_INPUT_VALIDATION': {
