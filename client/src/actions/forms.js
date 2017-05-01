@@ -26,3 +26,7 @@ export const setFormSubmitted = (model, value = true) => ({
   payload: value
 })
 
+export const clearForm = model => ({
+  type: 'FORMS.CLEAR_FORM',
+  model
+})

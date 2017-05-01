@@ -19,7 +19,8 @@ class Fab extends React.PureComponent {
     let fabStyles = fixed && {
       position: 'fixed',
       right: '1rem',
-      bottom: '1rem'
+      bottom: '1rem',
+      zIndex: 1
     }
 
     return (

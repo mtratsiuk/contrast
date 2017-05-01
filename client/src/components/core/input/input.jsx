@@ -7,12 +7,19 @@ import { MDCTextfield } from '@material/textfield'
 import { setInput, setInputValidation } from 'actions/forms'
 import { autocompleteFilter, autocompleteSort } from './utils'
 
-class Input extends React.PureComponent {
+class Input extends React.Component {
   constructor (props) {
     super(props)
+
+    this.state = {
+      autocomplete: this.props.autocomplete ? [] : null,
+      isOpen: false
+    }
+
     this.handleChange = this.handleChange.bind(this)
     this.handleInputChange = this.handleInputChange.bind(this)
     this.validate = this.validate.bind(this)
+    this.receiveAutocomplete = this.receiveAutocomplete.bind(this)
   }
 
   componentDidMount () {
@@ -20,6 +27,7 @@ class Input extends React.PureComponent {
     this._mdcTextfield = new MDCTextfield(this.element)
 
     dispatch(setInput(model, value, !this.validate(value)))
+    this.receiveAutocomplete(this.props.autocomplete)
   }
 
   componentWillUnmount () {
@@ -39,7 +47,27 @@ class Input extends React.PureComponent {
       if (!nextProps.invalid !== isValid) {
         dispatch(setInputValidation(nextProps.model, !isValid))
       }
+
+      if (this.props.form &&
+        this.props.form.submitted !== nextProps.form.submitted &&
+        !nextProps.form.submitted) {
+        this._blurred = false
+        this._dirty = false
+      }
     }
+
+    if (this.props.autocomplete !== nextProps.autocomplete) {
+      this.receiveAutocomplete(nextProps.autocomplete)
+    }
+  }
+
+  receiveAutocomplete (autocomplete) {
+    if (autocomplete && autocomplete.then) {
+      return autocomplete.then(data => this.setState({
+        autocomplete: data
+      }))
+    }
+    this.setState({ autocomplete })
   }
 
   handleChange (value) {
@@ -59,7 +87,8 @@ class Input extends React.PureComponent {
   }
 
   renderAutocomplete (inputProps) {
-    let { value, autocomplete } = this.props
+    let { value } = this.props
+    let { autocomplete } = this.state
     return (
       <Autocomplete
         ref={el => { this.inputElement = el }}
@@ -71,6 +100,7 @@ class Input extends React.PureComponent {
         value={value}
         shouldItemRender={autocompleteFilter}
         sortItems={autocompleteSort}
+        onMenuVisibilityChange={isOpen => this.setState({ isOpen })}
         renderItem={(item, isHighlighted) =>
           <li
             className={classnames('mdc-list-item', 'Input__autocomplete-item', {
@@ -85,6 +115,9 @@ class Input extends React.PureComponent {
             {items}
           </ul>
         }
+        wrapperStyle={{
+          width: '100%'
+        }}
       />
     )
   }
@@ -99,9 +132,11 @@ class Input extends React.PureComponent {
       value,
       invalid,
       required,
-      form,
-      autocomplete
+      className,
+      style,
+      form
     } = this.props
+    let { autocomplete, isOpen } = this.state
 
     let inputId = model
     let helperId = `${model}-validation-message`
@@ -119,6 +154,14 @@ class Input extends React.PureComponent {
       }
     )
 
+    let inputClassname = classnames(className, 'Input', {
+      'Input--open': isOpen
+    })
+
+    let labelClassname = classnames(className, 'mdc-textfield__label', {
+      'mdc-textfield__label--required': required
+    })
+
     let inputProps = {
       onBlur: () => { this._blurred = true; this._dirty = true },
       type: type,
@@ -129,7 +172,7 @@ class Input extends React.PureComponent {
     }
 
     return (
-      <div className='Input'>
+      <div className={inputClassname} style={style}>
         <div className={textfieldClassname} ref={el => { this.element = el }}>
           {!autocomplete &&
             <input
@@ -144,7 +187,7 @@ class Input extends React.PureComponent {
           }
           <label
             htmlFor={inputId}
-            className='mdc-textfield__label'>
+            className={labelClassname}>
             {label}
           </label>
         </div>

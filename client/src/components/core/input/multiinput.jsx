@@ -6,7 +6,7 @@ import { addMultiInputField, setInput } from 'actions/forms'
 
 class MultiInput extends React.Component {
   componentDidMount () {
-    this.props.addMultiInputField(this.props.model)
+    this.addInitialField(this.props)
   }
 
   componentWillReceiveProps (nextProps) {
@@ -16,6 +16,14 @@ class MultiInput extends React.Component {
         _.map(i => i.value, nextProps.inputs),
         _.some(i => i.invalid, nextProps.inputs)
       )
+    }
+
+    this.addInitialField(nextProps)
+  }
+
+  addInitialField (props) {
+    if (!props.inputModels || !props.inputModels.length) {
+      this.props.addMultiInputField(props.model)
     }
   }
 

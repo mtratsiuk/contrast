@@ -1,8 +1,9 @@
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 
-import { setFormSubmitted } from 'actions/forms'
 import * as userActions from 'actions/user'
+
+import { required } from 'utils/validators'
 
 import Form from 'components/core/form'
 import Input from 'components/core/input'
@@ -21,7 +22,10 @@ const Auth = ({
   return (
     <div className='Auth'>
       <div className='Auth__form'>
-        <Form model={`${type}`}>
+        <Form model={`${type}`} onSubmit={() => {
+          let { name, password } = form
+          dispatch(userActions[type](name.value, password.value))
+        }}>
           <Typography type='display1'>
             <h1>{title}</h1>
           </Typography>
@@ -29,7 +33,7 @@ const Auth = ({
             model={`${type}.name`}
             type='text'
             label='Name'
-            validate={value => /^.*\w.*$/.test(value)}
+            validate={required}
             required
             errorText='Name must contain at least one word character'
           />
@@ -54,11 +58,7 @@ const Auth = ({
           <Button
             className='Auth__submit-btn'
             primary
-            onClick={() => {
-              if (form.invalid) return dispatch(setFormSubmitted(type, true))
-              let { name, password } = form
-              dispatch(userActions[type](name.value, password.value))
-            }}>
+          >
             {title}
           </Button>
         </Form>

@@ -1,5 +1,11 @@
 .Input {
 
+  z-index: 0;
+
+  &--open {
+    z-index: 10;
+  }
+
   .mdc-textfield {
     width: 100%;
     z-index: 1;
@@ -15,7 +21,12 @@
     position: absolute;
     left: 0;
     top: 100%;
-    z-index: 1;
+    z-index: 2;
+  }
+
+  .mdc-textfield__label--required:after {
+    margin-left: 1px;
+    content: "*";
   }
 
   &__autocomplete-item {

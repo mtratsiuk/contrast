@@ -1,21 +1,30 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
-import store from 'store'
-import { setFormSubmitted } from 'actions/forms'
+import { setFormSubmitted, clearForm } from 'actions/forms'
 
-class Form extends React.PureComponent {
+class Form extends React.Component {
   componentWillUnmount () {
-    store.dispatch(setFormSubmitted(this.props.model, false))
+    this.props.setFormSubmitted(this.props.model, false)
   }
 
   render () {
-    let { onSubmit, className, children } = this.props
+    let {
+      invalid,
+      model,
+      onSubmit,
+      setFormSubmitted,
+      clearForm,
+      className,
+      children
+    } = this.props
 
     return (
       <form noValidate className={className} onSubmit={event => {
         event.preventDefault()
-        onSubmit && onSubmit(event)
-        return false
+        if (invalid) return setFormSubmitted(model, true)
+        if (onSubmit) onSubmit(event)
+        clearForm(model)
       }}>
         {children}
       </form>
@@ -23,4 +32,7 @@ class Form extends React.PureComponent {
   }
 }
 
-export default Form
+export default connect(
+  (state, { model }) => _.get(`forms.${model}`, state) || {},
+  { setFormSubmitted, clearForm }
+)(Form)

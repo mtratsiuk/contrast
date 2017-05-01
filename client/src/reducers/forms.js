@@ -28,6 +28,12 @@ const forms = (state = {}, action) => {
     case 'FORMS.SET_FORM_SUBMITTED': {
       return _.set(`${action.model}.submitted`, action.payload, state)
     }
+    case 'FORMS.CLEAR_FORM': {
+      return _.pipe(
+        _.omit(action.model),
+        _.set(`${action.model}.submitted`, false)
+      )(state)
+    }
   }
   return state
 }
