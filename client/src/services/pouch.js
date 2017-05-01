@@ -1,4 +1,6 @@
 import PouchDB from 'pouchdb'
+import pouchDBFind from 'pouchdb-find'
+PouchDB.plugin(pouchDBFind)
 
 import store from 'store'
 import { logout } from 'actions/user'
@@ -44,6 +46,10 @@ class Pouch {
     this._db.destroy()
     this._db = null
   }
+}
+
+if (__DEV__) {
+  window.PouchDB = PouchDB
 }
 
 export default new Pouch()
