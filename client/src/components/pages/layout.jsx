@@ -44,6 +44,7 @@ const Layout = ({
                   to={route.path}
                   activeClassName='mdc-permanent-drawer--selected mdc-temporary-drawer--selected'
                   className='mdc-list-item'
+                  onClick={() => { sidenav.close() }}
                 >
                   <i
                     className='material-icons mdc-list-item__start-detail' aria-hidden='true'>{route.icon}</i>

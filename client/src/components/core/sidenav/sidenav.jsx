@@ -39,8 +39,8 @@ class Sidenav extends React.PureComponent {
 
     return (
       <div className='Sidenav'>
-        <aside className='Sidenav__temporary mdc-temporary-drawer' ref={el => { this.element = el }} onClick={this.close}>
-          <nav className='mdc-temporary-drawer__drawer' onClick={event => event.stopPropagation()}>
+        <aside className='Sidenav__temporary mdc-temporary-drawer' ref={el => { this.element = el }}>
+          <nav className='mdc-temporary-drawer__drawer'>
             <header className='mdc-temporary-drawer__header'>
               <div className='mdc-temporary-drawer__header-content mdc-theme--primary-bg mdc-theme--text-primary-on-primary'>
                 {header}
