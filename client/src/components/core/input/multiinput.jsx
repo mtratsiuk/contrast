@@ -6,21 +6,21 @@ import { addMultiInputField, setInput } from 'actions/forms'
 
 class MultiInput extends React.Component {
   componentDidMount () {
-    this.props.dispatch(addMultiInputField(this.props.model))
+    this.props.addMultiInputField(this.props.model)
   }
 
   componentWillReceiveProps (nextProps) {
     if (!_.isEqual(nextProps.inputs, this.props.inputs)) {
-      this.props.dispatch(setInput(
+      this.props.setInput(
         this.props.model,
         _.map(i => i.value, nextProps.inputs),
         _.some(i => i.invalid, nextProps.inputs)
-      ))
+      )
     }
   }
 
   render () {
-    let { inputModels, ...inputProps } = this.props
+    let { inputModels, inputs, ...inputProps } = this.props
 
     return (
       <div className='MultiInput'>
@@ -30,6 +30,13 @@ class MultiInput extends React.Component {
             key={model}
             model={model}
           />, inputModels)
+        }
+        {!!_.get('value.length', _.last(inputs)) &&
+          <i
+            onClick={() => this.props.addMultiInputField(this.props.model)}
+            className='MultiInput__icon material-icons'>
+            add_circle_outline
+          </i>
         }
       </div>
     )
@@ -51,5 +58,6 @@ export default connect(
       inputModels,
       inputs
     }
-  }
+  },
+  { addMultiInputField, setInput }
 )(MultiInput)
