@@ -1,7 +1,7 @@
-import operation from 'models/transaction'
+import transaction from 'models/transaction'
 
 export const getModels = db => ({
-  Operation: operation(db)
+  Transaction: transaction(db)
 })
 
 export default getModels
