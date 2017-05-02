@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { setFormSubmitted, clearForm } from 'actions/forms'
+import { getFormData } from 'utils/forms'
 
 class Form extends React.Component {
   componentWillUnmount () {
@@ -10,7 +11,7 @@ class Form extends React.Component {
 
   render () {
     let {
-      invalid,
+      form,
       model,
       onSubmit,
       setFormSubmitted,
@@ -22,8 +23,8 @@ class Form extends React.Component {
     return (
       <form noValidate className={className} onSubmit={event => {
         event.preventDefault()
-        if (invalid) return setFormSubmitted(model, true)
-        if (onSubmit) onSubmit(event)
+        if (form.invalid) return setFormSubmitted(model, true)
+        if (onSubmit) onSubmit(getFormData(form))
         clearForm(model)
       }}>
         {children}
@@ -33,6 +34,6 @@ class Form extends React.Component {
 }
 
 export default connect(
-  (state, { model }) => _.get(`forms.${model}`, state) || {},
+  (state, { model }) => ({ form: _.get(`forms.${model}`, state) || {} }),
   { setFormSubmitted, clearForm }
 )(Form)

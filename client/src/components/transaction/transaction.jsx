@@ -9,7 +9,6 @@ import { createTransaction, getAutocompleteItems } from 'actions/transaction'
 
 import currencyCodes from 'services/currency/currency-codes'
 import { required, emptyOr } from 'utils/validators'
-import { getFormData } from 'utils/forms'
 
 class Transaction extends React.Component {
   componentDidMount () {
@@ -17,15 +16,14 @@ class Transaction extends React.Component {
   }
 
   render () {
-    let { form, autocomplete, createTransaction } = this.props
+    let { autocomplete, createTransaction } = this.props
 
     return (
       <Form
         model='transaction'
         className='Transaction'
-        onSubmit={() => createTransaction(getFormData(form))}
+        onSubmit={createTransaction}
       >
-
         <Input
           model='transaction.value'
           label='Value'
@@ -63,7 +61,6 @@ class Transaction extends React.Component {
           autocomplete={autocomplete.tags}
           label='Tag'
         />
-
         <Fab fixed />
       </Form>
     )
@@ -72,7 +69,6 @@ class Transaction extends React.Component {
 
 export default connect(
   state => ({
-    form: _.get('forms.transaction', state),
     autocomplete: _.get('transaction.autocomplete', state)
   }),
   { createTransaction, getAutocompleteItems }

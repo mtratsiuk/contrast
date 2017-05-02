@@ -1,6 +1,5 @@
-export const getFormData = form => {
-  return _.pipe(
-    _.omit('invalid'),
-    _.mapValues('value')
-  )(form)
-}
+export const getFormData = _.pipe(
+  _.omit(['invalid', 'submitted']),
+  _.omitBy((v, k) => /^__.*__$/.test(k)),
+  _.mapValues('value')
+)

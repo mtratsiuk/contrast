@@ -11,7 +11,6 @@ import Button from 'components/core/button'
 import Typography from 'components/core/typography'
 
 const Auth = ({
-  form,
   dispatch,
   type,
   title
@@ -22,9 +21,8 @@ const Auth = ({
   return (
     <div className='Auth'>
       <div className='Auth__form'>
-        <Form model={`${type}`} onSubmit={() => {
-          let { name, password } = form
-          dispatch(userActions[type](name.value, password.value))
+        <Form model={`${type}`} onSubmit={({ name, password }) => {
+          dispatch(userActions[type](name, password))
         }}>
           <Typography type='display1'>
             <h1>{title}</h1>
@@ -75,6 +73,4 @@ const Auth = ({
   )
 }
 
-export default connect((state, ownProps) => ({
-  form: state.forms[ownProps.type] || {}
-}))(Auth)
+export default connect()(Auth)
