@@ -1,7 +1,7 @@
 export const createTransaction = payload => async (dispatch, { models: { Transaction } }) => {
   let transaction = new Transaction(payload)
-  await transaction.save()
-  // TODO: Error handling
+  await transaction.save() // TODO: Error handling
+  dispatch(getAutocompleteItems())
 }
 
 export const getAutocompleteItems = () => async (dispatch, { models: { Transaction } }) => {
