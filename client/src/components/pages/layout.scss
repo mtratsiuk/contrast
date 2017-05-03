@@ -17,6 +17,15 @@
     flex-grow: 2;
     padding: $mdc-layout-grid-default-margin;
   }
+
+  // Hot-fix, remove after https://github.com/material-components/material-components-web/pull/555
+  .mdc-temporary-drawer {
+    opacity: 0;
+
+    &--open {
+      opacity: 1;
+    }
+  }
 }
 
 .Layout-header {
