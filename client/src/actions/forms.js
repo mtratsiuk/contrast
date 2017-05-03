@@ -1,9 +1,10 @@
-export const setInput = (model, value, invalid) => ({
+export const setInput = (model, value, invalid, { config } = {}) => ({
   type: 'FORMS.SET_INPUT',
   model,
   payload: {
     value,
-    invalid
+    invalid,
+    ...config
   }
 })
 

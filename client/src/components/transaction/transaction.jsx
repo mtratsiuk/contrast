@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import Form from 'components/core/form'
 import { Input, MultiInput } from 'components/core/input'
+import Select from 'components/core/select'
 import Fab from 'components/core/fab'
 
 import { createTransaction, getAutocompleteItems } from 'actions/transaction'
@@ -24,6 +25,13 @@ class Transaction extends React.Component {
         className='Transaction'
         onSubmit={createTransaction}
       >
+        <Select
+          model='transaction.type'
+          options={[
+            { title: 'Expense', data: 'expense' },
+            { title: 'Income', data: 'income' }
+          ]}
+        />
         <Input
           model='transaction.value'
           label='Value'
