@@ -36,10 +36,10 @@ class SimpleMenu extends React.PureComponent {
   }
 
   render () {
-    let { options, children } = this.props
+    let { options, children, style } = this.props
 
     return (
-      <div className='mdc-menu-anchor'>
+      <div className='mdc-menu-anchor' style={style}>
         <Button
           raised={false}
           className='mdc-theme--text-primary-on-primary'

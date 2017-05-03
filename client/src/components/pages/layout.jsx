@@ -19,19 +19,22 @@ const Layout = ({
     <div className='Layout'>
 
       <header className='Layout__header mdc-toolbar mdc-toolbar--fixed'>
-        <section className='Layout-header__menu-toggler mdc-toolbar__section mdc-toolbar__section--align-start'>
-          <button className='material-icons' onClick={() => sidenav.open()}>menu</button>
-        </section>
-        <section className='mdc-toolbar__section mdc-toolbar__section--align-start'>
-          <span className='mdc-toolbar__title'>{title}</span>
-        </section>
-        <section className='mdc-toolbar__section mdc-toolbar__section--align-end'>
-          <SimpleMenu
-            options={[
-              { title: 'Log Out', action: () => dispatch(logout()) }
-            ]}
-          />
-        </section>
+        <div className='mdc-toolbar__row'>
+          <section className='Layout-header__menu-toggler mdc-toolbar__section mdc-toolbar__section--align-start'>
+            <button className='material-icons' onClick={() => sidenav.open()}>menu</button>
+          </section>
+          <section className='mdc-toolbar__section mdc-toolbar__section--align-start'>
+            <span className='mdc-toolbar__title'>{title}</span>
+          </section>
+          <section className='mdc-toolbar__section mdc-toolbar__section--align-end'>
+            <SimpleMenu
+              options={[
+                { title: 'Log Out', action: () => dispatch(logout()) }
+              ]}
+              style={{ alignSelf: 'center' }}
+            />
+          </section>
+        </div>
       </header>
 
       <div className='Layout__sidenav mdc-toolbar-fixed-adjust'>
