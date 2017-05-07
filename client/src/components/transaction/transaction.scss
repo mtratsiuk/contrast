@@ -1,11 +1,26 @@
 .Transaction {
   width: 100%;
+  max-width: 650px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   padding-bottom: 60px;
+  position: relative;
 
   > .Input, .MultiInput {
     width: 100%;
+  }
+
+  &__fab {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 9;
+
+    @include mobile {
+      position: fixed;
+      right: 1rem;
+      bottom: 1rem;
+    }
   }
 }

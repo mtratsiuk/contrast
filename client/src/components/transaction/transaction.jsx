@@ -69,7 +69,7 @@ class Transaction extends React.Component {
           autocomplete={autocomplete.tags}
           label='Tag'
         />
-        <Fab fixed />
+        <Fab className='Transaction__fab' />
       </Form>
     )
   }

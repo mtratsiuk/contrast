@@ -2,9 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-const Typography = ({ type, children, className }) => {
+const Typography = ({ type, children, className, adjustMargin }) => {
   return React.cloneElement(children, {
-    className: classnames(className, `mdc-typography--${type}`)
+    className: classnames(className, `mdc-typography--${type}`, {
+      'mdc-typography--adjust-margin': adjustMargin
+    })
   })
 }
 

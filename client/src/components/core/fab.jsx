@@ -13,20 +13,14 @@ class Fab extends React.PureComponent {
   }
 
   render () {
-    let { icon, disabled, fixed, className } = this.props
+    let { icon, disabled, style, className } = this.props
 
     let fabClassname = classnames('Fab', 'mdc-fab', 'material-icons', className)
-    let fabStyles = fixed && {
-      position: 'fixed',
-      right: '1rem',
-      bottom: '1rem',
-      zIndex: 1
-    }
 
     return (
       <button
         ref={el => { this.element = el }}
-        style={fabStyles}
+        style={style}
         className={fabClassname}
         aria-label={icon}
         disabled={disabled}
@@ -45,8 +39,7 @@ Fab.defaultProps = {
 
 Fab.propTypes = {
   icon: PropTypes.string,
-  disabled: PropTypes.bool,
-  fixed: PropTypes.bool
+  disabled: PropTypes.bool
 }
 
 export default Fab
