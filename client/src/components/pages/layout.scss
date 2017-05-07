@@ -33,7 +33,7 @@
   &__menu-toggler {
     display: none;
 
-    @include mobile {
+    @include tablet {
       display: block;
       flex-grow: 0;
       flex-basis: 20%;

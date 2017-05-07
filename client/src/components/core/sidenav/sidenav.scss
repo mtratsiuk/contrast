@@ -4,14 +4,14 @@
   &__temporary {
     display: none;
 
-    @include mobile {
+    @include tablet {
       display: block;
     }
   }
 
   &__permanent {
 
-    @include mobile {
+    @include tablet {
       display: none;
     }
   }
