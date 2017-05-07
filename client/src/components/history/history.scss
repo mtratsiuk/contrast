@@ -1,12 +1,32 @@
 .History {
+  max-width: 850px;
 
   .mdc-list {
     padding: 0;
   }
 
-  .mdc-list-item {
+  &__item {
     align-items: flex-start;
     justify-content: space-between;
+
+    &--head {
+      height: 50px;
+    }
+  }
+
+  &__item-value {
+
+    &:before {
+      content: '- ';
+    }
+
+    &--income {
+      color: #00E676;
+
+      &:before {
+        content: '+ ';
+      }
+    }
   }
 
   .mdc-list-item__text {
