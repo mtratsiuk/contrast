@@ -1,5 +1,7 @@
 import base from 'models/base'
 
+const { locale } = (new Intl.NumberFormat()).resolvedOptions()
+
 export default db => {
   class Transaction extends base(db) {
     constructor (data) {
@@ -12,6 +14,17 @@ export default db => {
       this.category = data.category
       this.tags = (data.tags || []).filter(x => !!x)
       this.timestamp = data.timestamp || Date.now()
+    }
+
+    getFormattedDate () {
+      return (new Date(this.timestamp)).toLocaleString()
+    }
+
+    getFormattedValue () {
+      return (new Intl.NumberFormat(locale, {
+        style: 'currency',
+        currency: this.currency
+      })).format(this.value)
     }
 
     static async getAll () {

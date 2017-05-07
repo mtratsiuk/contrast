@@ -1,0 +1,33 @@
+.History {
+
+  .mdc-list {
+    padding: 0;
+  }
+
+  .mdc-list-item {
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .mdc-list-item__text {
+    flex: 1 0 40%;
+    height: initial;
+    margin-left: initial;
+    margin-right: initial;
+    padding-right: 16px;
+    overflow: hidden;
+
+    > span {
+      width: 100%;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+  }
+
+  .mdc-list-item__end-detail {
+    flex: 1 0 20%;
+    text-align: right;
+    padding-right: 0;
+  }
+}
