@@ -3,7 +3,7 @@ import Typography from 'components/core/typography'
 
 const TransactionPage = () => {
   return (
-    <div>
+    <div className='TransactionPage'>
       <Typography type='headline' adjustMargin>
         <h1>Create new transaction:</h1>
       </Typography>

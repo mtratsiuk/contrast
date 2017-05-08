@@ -1,24 +1,17 @@
 .Transaction {
-  $form-max-width: 650px;
-
   width: 100%;
-  max-width: $form-max-width;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   padding-bottom: 60px;
   position: relative;
 
-  @include tablet {
-    max-width: 100%;
-  }
-
   > .Input, .MultiInput {
     width: 100%;
   }
 
   .mdc-select__menu {
-    max-width: $form-max-width;
+    max-width: $Transaction__form-max-width;
 
     @include tablet {
       max-width: 100%;

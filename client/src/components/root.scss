@@ -23,7 +23,11 @@ html, body, #root {
 @import "components/core/sidenav/sidenav";
 @import "components/core/input/input";
 @import "components/core/input/multiinput";
+
 @import "components/pages/layout";
+@import "components/pages/transaction/transaction-page";
+@import "components/pages/history/history-page";
+
 @import "components/auth/auth";
 @import "components/transaction/transaction";
 @import "components/history/history";

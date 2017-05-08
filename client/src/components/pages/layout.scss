@@ -16,6 +16,8 @@
     overflow-x: hidden;
     flex-grow: 2;
     padding: $mdc-layout-grid-default-margin;
+    display: flex;
+    justify-content: center;
   }
 
   // Hot-fix, remove after https://github.com/material-components/material-components-web/pull/555

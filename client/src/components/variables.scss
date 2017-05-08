@@ -12,3 +12,5 @@ $mobile-bp: map-get($mdc-layout-grid-breakpoints, tablet);
     @content;
   }
 }
+
+$Transaction__form-max-width: 650px;
