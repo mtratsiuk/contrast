@@ -1,0 +1,21 @@
+.HistoryFilters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 40px;
+
+  > * {
+    width: 45%;
+
+    @include mobile {
+      width: 100%;
+    }
+  }
+
+  .Select {
+    display: flex;
+    align-items: center;
+    position: relative;
+    bottom: -8px;
+  }
+}

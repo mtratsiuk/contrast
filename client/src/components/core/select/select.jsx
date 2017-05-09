@@ -33,17 +33,16 @@ class Select extends React.Component {
     let { options, value, className, style } = this.props
 
     return (
-      <div className={classnames('Select', className)} style={{ width: '100%', ...style }}>
+      <div className={classnames('Select', className)} style={style}>
         <div
           className='mdc-select'
           role='listbox'
           tabIndex='0'
           ref={el => { this.element = el }}
-          style={{ width: '100%', maxWidth: 'initial', minWidth: '100%' }}
         >
           <span className='mdc-select__selected-text'>{value.title}</span>
-          <div className='mdc-simple-menu mdc-select__menu' style={{ width: '100%' }}>
-            <ul className='mdc-list mdc-simple-menu__items' style={{ width: '100%' }}>
+          <div className='mdc-simple-menu mdc-select__menu'>
+            <ul className='mdc-list mdc-simple-menu__items'>
               {_.map(option => (
                 <li
                   key={option.title}
@@ -52,7 +51,6 @@ class Select extends React.Component {
                   id={option.title}
                   tabIndex='0'
                   aria-selected={option === value}
-                  style={{ width: '100%' }}
                 >
                   {option.title}
                 </li>

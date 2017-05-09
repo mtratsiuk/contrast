@@ -14,6 +14,13 @@
     }
   }
 
+  &__item-category {
+
+    @include mobile {
+      display: none;
+    }
+  }
+
   &__item-value {
 
     &:before {
@@ -37,6 +44,10 @@
     padding-right: 16px;
     overflow: hidden;
 
+    @include mobile {
+      flex-basis: 50%;
+    }
+
     > span {
       width: 100%;
       text-overflow: ellipsis;
@@ -51,3 +62,5 @@
     padding-right: 0;
   }
 }
+
+@import "history-filters";

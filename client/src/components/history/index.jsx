@@ -1,1 +1,2 @@
-export { default } from './history'
+export { default, default as History } from './history'
+export { default as HistoryFilters } from './history-filters'
