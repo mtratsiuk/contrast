@@ -4,6 +4,7 @@ const router = express.Router()
 
 const http = require('./shared/http')
 const logger = require('./shared/logger')
+const createCacheLoader = require('./shared/create-cache-loader')
 
 const couchService = require('./services/couch')({ http, logger })
 const couch = require('./controllers/couch')({ couch: couchService })
@@ -17,7 +18,7 @@ router.all('/sync/userdb-*', proxy(couchService.COUCH_URL, {
   forwardPath: (req, res) => req.url.slice(req.url.indexOf('sync') + 'sync'.length)
 }))
 
-const ratesService = require('./services/rates')({ http, logger })
+const ratesService = require('./services/rates')({ createCacheLoader })
 const rates = require('./controllers/rates')({ rates: ratesService })
 
 router.get('/rates', rates.get)

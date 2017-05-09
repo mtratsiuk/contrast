@@ -2,7 +2,8 @@ const initialState = {
   autocomplete: {
     names: [],
     tags: [],
-    categories: []
+    categories: [],
+    currencyCodes: []
   }
 }
 

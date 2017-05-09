@@ -8,7 +8,6 @@ import Fab from 'components/core/fab'
 
 import { createTransaction, getAutocompleteItems } from 'actions/transaction'
 
-import currencyCodes from 'services/currency/currency-codes'
 import { required, emptyOr } from 'utils/validators'
 
 class Transaction extends React.Component {
@@ -43,9 +42,9 @@ class Transaction extends React.Component {
         <Input
           model='transaction.currency'
           label='Currency'
-          validate={value => currencyCodes.indexOf(value) >= 0}
+          validate={value => (autocomplete.currencyCodes || []).indexOf(value) >= 0}
           errorText='Should be valid currency code'
-          autocomplete={currencyCodes}
+          autocomplete={autocomplete.currencyCodes}
           required
           style={{ width: '35%' }}
         />

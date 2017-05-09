@@ -33,3 +33,5 @@ export const set = (key, value) => {
 export const remove = key => storage.removeItem(key)
 
 export const clear = () => storage.clear()
+
+export default { get, set, remove, clear }
