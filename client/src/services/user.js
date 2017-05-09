@@ -1,14 +1,15 @@
 import EventEmitter from 'utils/event-emitter'
-import { get, set, remove } from 'utils/storage'
+import storage from 'utils/storage'
 import http from 'shared/http'
 import store from 'store'
 
 const BASE_URL = '/api'
 const USER_KEY = 'user'
+const SETTINGS_KEY = 'settings'
 
 class UserService extends EventEmitter {
   _login (data) {
-    set(USER_KEY, data)
+    storage.set(USER_KEY, data)
     this._emit('login', data)
     return store.dispatch({
       type: 'USER.LOGIN',
@@ -30,19 +31,24 @@ class UserService extends EventEmitter {
     try {
       await http.post(`${BASE_URL}/logout`)
     } finally {
-      remove(USER_KEY)
+      storage.clear()
       this._emit('logout')
       store.dispatch({ type: 'USER.LOGOUT' })
     }
   }
 
   isLoggedIn () {
-    return get(USER_KEY) != null
+    return storage.get(USER_KEY) != null
   }
 
   getData () {
-    return get(USER_KEY)
+    return storage.get(USER_KEY)
   }
+
+  getPreferredCurrency () {
+    return (storage.get(SETTINGS_KEY) || {}).preferredCurrency || 'USD'
+  }
+
 }
 
 export default new UserService()

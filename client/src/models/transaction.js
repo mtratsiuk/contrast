@@ -1,6 +1,5 @@
 import base from 'models/base'
-
-const { locale } = (new Intl.NumberFormat()).resolvedOptions()
+import * as currencyService from 'services/currency'
 
 export default db => {
   class Transaction extends base(db) {
@@ -21,10 +20,15 @@ export default db => {
     }
 
     getFormattedValue () {
-      return (new Intl.NumberFormat(locale, {
-        style: 'currency',
-        currency: this.currency
-      })).format(this.value)
+      return currencyService.format(this.value, this.currency)
+    }
+
+    get isExpense () {
+      return !this.type || this.type === 'expense'
+    }
+
+    get isIncome () {
+      return this.type === 'income'
     }
 
     static async getAll () {

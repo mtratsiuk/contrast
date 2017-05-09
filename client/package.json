@@ -1,6 +1,6 @@
 {
   "name": "contrast-client",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "",
   "author": "Mihail Tratsiuk",
   "license": "MIT",
@@ -32,6 +32,7 @@
     "classnames": "~2.2.5",
     "lodash": "~4.17.4",
     "material-components-web": "~0.10.0",
+    "money": "^0.2.0",
     "normalize.css": "~5.0.0",
     "pouchdb": "~6.1.2",
     "pouchdb-find": "^6.2.0",
