@@ -34,8 +34,8 @@ class Transaction extends React.Component {
         <Input
           model='transaction.value'
           label='Value'
-          validate={required}
-          errorText='Transaction value is required'
+          validate={value => _.isFinite(+value)}
+          errorText='Should be a number'
           required
           style={{ width: '60%' }}
         />
