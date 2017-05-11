@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import classnames from 'classnames'
 
-import Typography from 'components/core/typography'
 import { filter } from 'components/history/utils'
 
 import { getTransactions } from 'actions/history'
@@ -14,6 +13,8 @@ class History extends React.Component {
     super(props)
 
     this.state = {}
+
+    this.renderTransaction = this.renderTransaction.bind(this)
   }
 
   componentDidMount () {
@@ -46,43 +47,32 @@ class History extends React.Component {
             `Results: ${filteredItems.length} transactions, ${currencyService.format(result)} total`
           }
         </div>
-        <ul className='mdc-list mdc-list--two-line'>
-          <Typography type='title'>
-            <li className='History__item History__item--head mdc-list-item' key='head'>
-              <span className='mdc-list-item__text mdc-list-item__start-detail'>
-                <span>Transaction</span>
-              </span>
-              <span className='History__item-category mdc-list-item__text'>
-                <span>Category/Tags</span>
-              </span>
-              <span className='mdc-list-item__text mdc-list-item__end-detail'>
-                <span>Value</span>
-              </span>
-            </li>
-          </Typography>
+        <div className='History__items'>
           {_.pipe(
             _.orderBy('timestamp', 'desc'),
-            _.map(transaction =>
-              <li className='History__item mdc-list-item' key={transaction._id}>
-                <span className='mdc-list-item__text mdc-list-item__start-detail'>
-                  <span>{transaction.name}</span>
-                  <span className='mdc-list-item__text__secondary'>{transaction.getFormattedDate()}</span>
-                </span>
-                <span className='History__item-category mdc-list-item__text'>
-                  <span>{transaction.category}</span>
-                  <span className='mdc-list-item__text__secondary'>{transaction.tags.join(', ')}</span>
-                </span>
-                <span className='mdc-list-item__text mdc-list-item__end-detail'>
-                  <span
-                    className={classnames('History__item-value', {
-                      'History__item-value--income': transaction.isIncome
-                    })}>
-                    {transaction.getFormattedValue()}
-                  </span>
-                </span>
-              </li>
-            ))(filteredItems)}
-        </ul>
+            _.map(this.renderTransaction)
+          )(filteredItems)}
+        </div>
+      </div>
+    )
+  }
+
+  renderTransaction (transaction) {
+    return (
+      <div className='History__item' key={transaction._id}>
+        <div className='History-item__group'>
+          <div className='History-item__main'>{transaction.name}</div>
+          <div className='History-item__secondary'>{transaction.getFormattedDate()}</div>
+        </div>
+        <div className='History-item__group'>
+          {transaction.category && <div className='History-item__main'>{transaction.category}</div>}
+          {transaction.tags && <div className='History-item__secondary'>{transaction.tags.join(', ')}</div>}
+        </div>
+        <div className={classnames('History-item__group', 'History-item__value', {
+          'History-item__value--income': transaction.isIncome
+        })}>
+          <div className='History-item__main'>{transaction.getFormattedValue()}</div>
+        </div>
       </div>
     )
   }

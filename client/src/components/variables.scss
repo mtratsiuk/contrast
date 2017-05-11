@@ -1,8 +1,17 @@
 $tablet-bp: map-get($mdc-layout-grid-breakpoints, desktop);
 $mobile-bp: map-get($mdc-layout-grid-breakpoints, tablet);
 
+$Sidenav__width: $mdc-persistent-drawer-width;
+$Transaction__form-max-width: 650px;
+
 @mixin tablet {
   @media screen and (max-width: $tablet-bp) {
+    @content;
+  }
+}
+
+@mixin tablet-content {
+  @media screen and (max-width: $tablet-bp + $Sidenav__width) {
     @content;
   }
 }
@@ -12,5 +21,3 @@ $mobile-bp: map-get($mdc-layout-grid-breakpoints, tablet);
     @content;
   }
 }
-
-$Transaction__form-max-width: 650px;
