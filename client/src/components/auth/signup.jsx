@@ -3,7 +3,7 @@ import Auth from './auth'
 const Signup = () =>
   <Auth
     type='signup'
-    title='Sign Up'
+    title='signup'
   />
 
 export default Signup

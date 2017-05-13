@@ -6,12 +6,14 @@ import { logout } from 'actions/user'
 import appRoutes from 'components/app-routes'
 import Sidenav from 'components/core/sidenav'
 import SimpleMenu from 'components/core/simple-menu'
+import withTranslations from 'components/core/i18n'
 
 const Layout = ({
   location,
   title,
   username,
-  dispatch
+  dispatch,
+  t
 }) => {
   let sidenav
 
@@ -24,12 +26,12 @@ const Layout = ({
             <button className='material-icons' onClick={() => sidenav.open()}>menu</button>
           </section>
           <section className='mdc-toolbar__section mdc-toolbar__section--align-start'>
-            <span className='mdc-toolbar__title'>{title}</span>
+            <span className='mdc-toolbar__title'>{t(title)}</span>
           </section>
           <section className='mdc-toolbar__section mdc-toolbar__section--align-end'>
             <SimpleMenu
               options={[
-                { title: 'Log Out', action: () => dispatch(logout()) }
+                { title: t('logout'), action: () => dispatch(logout()) }
               ]}
               style={{ alignSelf: 'center' }}
             />
@@ -51,7 +53,7 @@ const Layout = ({
                 >
                   <i
                     className='material-icons mdc-list-item__start-detail' aria-hidden='true'>{route.icon}</i>
-                  {route.title}
+                  {t(route.title)}
                 </NavLink>
               )(appRoutes)
             }
@@ -83,4 +85,4 @@ export default connect(
       appRoutes
     ) || {}).title || 'Contrast'
   })
-)(Layout)
+)(withTranslations(Layout))

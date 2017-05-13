@@ -5,7 +5,7 @@ import store from 'store'
 
 const BASE_URL = '/api'
 const USER_KEY = 'user'
-const SETTINGS_KEY = 'settings'
+const CURRENCY_KEY = 'currency'
 
 class UserService extends EventEmitter {
   _login (data) {
@@ -31,7 +31,7 @@ class UserService extends EventEmitter {
     try {
       await http.post(`${BASE_URL}/logout`)
     } finally {
-      storage.clear()
+      storage.remove(USER_KEY)
       this._emit('logout')
       store.dispatch({ type: 'USER.LOGOUT' })
     }
@@ -46,7 +46,7 @@ class UserService extends EventEmitter {
   }
 
   getPreferredCurrency () {
-    return (storage.get(SETTINGS_KEY) || {}).preferredCurrency || 'USD'
+    return (storage.get(CURRENCY_KEY) || {}).preferredCurrency || 'USD'
   }
 
 }

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import classnames from 'classnames'
 
 import { filter } from 'components/history/utils'
+import withTranslations from 'components/core/i18n'
 
 import { getTransactions } from 'actions/history'
 import { getFormData } from 'utils/forms'
@@ -39,14 +40,18 @@ class History extends React.Component {
 
   render () {
     let { filteredItems, result } = this.state
+    let { t } = this.props
 
     return (
       <div className='History'>
         {result != null &&
           <div className='History__results'>
-            <div className='History__results-header'>Results:</div>
+            <div className='History__results-header'>{t('history_list.results')}:</div>
             <div className='History__results-body'>
-              {filteredItems.length} transactions, {currencyService.format(result)} total
+              {t('history_list.results_body', {
+                count: filteredItems.length,
+                value: currencyService.format(result)
+              })}
             </div>
           </div>
         }
@@ -87,4 +92,4 @@ export default connect(
     filterQuery: _.get('forms.historyFilters', state)
   }),
   { getTransactions }
-)(History)
+)(withTranslations(History))

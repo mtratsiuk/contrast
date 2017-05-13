@@ -3,7 +3,7 @@ import Auth from './auth'
 const Login = () =>
   <Auth
     type='login'
-    title='Log In'
+    title='login'
   />
 
 export default Login

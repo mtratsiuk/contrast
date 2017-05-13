@@ -1,4 +1,3 @@
-import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 
 import * as userActions from 'actions/user'
@@ -9,14 +8,16 @@ import Form from 'components/core/form'
 import Input from 'components/core/input'
 import Button from 'components/core/button'
 import Typography from 'components/core/typography'
+import withTranslations from 'components/core/i18n'
 
 const Auth = ({
   dispatch,
   type,
-  title
+  title,
+  t
 }) => {
   let otherType = type === 'login' ? 'signup' : 'login'
-  let otherTitle = type === 'login' ? 'Sign Up' : 'Log In'
+  let otherTitle = type === 'login' ? 'signup' : 'login'
 
   return (
     <div className='Auth'>
@@ -25,31 +26,31 @@ const Auth = ({
           dispatch(userActions[type](name, password))
         }}>
           <Typography type='display1'>
-            <h1>{title}</h1>
+            <h1>{t(title)}</h1>
           </Typography>
           <Input
             model={`${type}.name`}
             type='text'
-            label='Name'
+            label={t('name')}
             validate={required}
             required
-            errorText='Name must contain at least one word character'
+            errorText={t('auth.name_error')}
           />
           <Input
             model={`${type}.password`}
             type='password'
-            label='Password'
+            label={t('password')}
             validate={value => !!value.length}
-            errorText='Password required'
+            errorText={t('auth.password_error')}
             required
           />
           {type === 'signup' &&
             <Input
               model={`${type}.repeatPassword`}
               type='password'
-              label='Confirm password'
+              label={t('auth.confirm_password_label')}
               validate={(value, form) => _.get('password.value', form) === value}
-              errorText='Passwords do not match'
+              errorText={t('auth.confirm_password_error')}
               required
             />
           }
@@ -57,7 +58,7 @@ const Auth = ({
             className='Auth__submit-btn'
             primary
           >
-            {title}
+            {t(title)}
           </Button>
         </Form>
         <Button
@@ -66,11 +67,11 @@ const Auth = ({
           primary
           dense
           onClick={() => dispatch(push(`/${otherType}`))}>
-          {otherTitle}
+          {t(otherTitle)}
         </Button>
       </div>
     </div>
   )
 }
 
-export default connect()(Auth)
+export default withTranslations(Auth)

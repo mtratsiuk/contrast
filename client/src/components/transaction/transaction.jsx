@@ -5,6 +5,7 @@ import Form from 'components/core/form'
 import { Input, MultiInput } from 'components/core/input'
 import Select from 'components/core/select'
 import Fab from 'components/core/fab'
+import withTranslations from 'components/core/i18n'
 
 import { createTransaction, getAutocompleteItems } from 'actions/transaction'
 
@@ -16,7 +17,7 @@ class Transaction extends React.Component {
   }
 
   render () {
-    let { autocomplete, createTransaction } = this.props
+    let { autocomplete, createTransaction, t } = this.props
 
     return (
       <Form
@@ -27,32 +28,32 @@ class Transaction extends React.Component {
         <Select
           model='transaction.type'
           options={[
-            { title: 'Expense', data: 'expense' },
-            { title: 'Income', data: 'income' }
+            { title: t('expense'), data: 'expense' },
+            { title: t('income'), data: 'income' }
           ]}
         />
         <Input
           model='transaction.value'
-          label='Value'
+          label={t('transaction_form.value_label')}
           validate={value => _.isFinite(+value)}
-          errorText='Should be a number'
+          errorText={t('transaction_form.value_error')}
           required
           style={{ width: '60%' }}
         />
         <Input
           model='transaction.currency'
-          label='Currency'
+          label={t('transaction_form.currency_label')}
           validate={value => (autocomplete.currencyCodes || []).indexOf(value) >= 0}
-          errorText='Should be valid currency code'
+          errorText={t('transaction_form.currency_error')}
           autocomplete={autocomplete.currencyCodes}
           required
           style={{ width: '35%' }}
         />
         <Input
           model='transaction.name'
-          label='Name'
+          label={t('transaction_form.name_label')}
           validate={required}
-          errorText='Transaction name is required'
+          errorText={t('transaction_form.name_error')}
           autocomplete={autocomplete.names}
           required
         />
@@ -60,13 +61,13 @@ class Transaction extends React.Component {
           model='transaction.category'
           validate={emptyOr(required)}
           autocomplete={autocomplete.categories}
-          label='Category'
+          label={t('transaction_form.category_label')}
         />
         <MultiInput
           model='transaction.tags'
           validate={emptyOr(required)}
           autocomplete={autocomplete.tags}
-          label='Tag'
+          label={t('transaction_form.tags_label')}
         />
         <Fab className='Transaction__fab' />
       </Form>
@@ -79,4 +80,4 @@ export default connect(
     autocomplete: _.get('transaction.autocomplete', state)
   }),
   { createTransaction, getAutocompleteItems }
-)(Transaction)
+)(withTranslations(Transaction))

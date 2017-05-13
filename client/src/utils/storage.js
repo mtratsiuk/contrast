@@ -18,19 +18,21 @@ const storage = window.localStorage || {
   }
 }
 
+const _getKey = key => `_contrast_${key}`
+
 export const get = key => {
   try {
-    return JSON.parse(storage.getItem(key))
+    return JSON.parse(storage.getItem(_getKey(key)))
   } catch (error) {
     return null
   }
 }
 
 export const set = (key, value) => {
-  storage.setItem(key, JSON.stringify(value))
+  storage.setItem(_getKey(key), JSON.stringify(value))
 }
 
-export const remove = key => storage.removeItem(key)
+export const remove = key => storage.removeItem(_getKey(key))
 
 export const clear = () => storage.clear()
 

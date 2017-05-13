@@ -5,13 +5,13 @@ import HistoryPage from 'components/pages/history'
 export default [
   {
     path: '/transaction',
-    title: 'Transaction',
+    title: 'transaction',
     icon: 'star',
     component: TransactionPage
   },
   {
     path: '/history',
-    title: 'History',
+    title: 'history',
     icon: 'star',
     component: HistoryPage
   },

@@ -1,0 +1,48 @@
+{
+  "expense": "Expense",
+  "income": "Income",
+  "transaction": "Transaction",
+  "history": "History",
+
+  "login": "Log In",
+  "logout": "Log Out",
+  "signup": "Sign Up",
+  "name": "Name",
+  "password": "Password",
+
+  "auth": {
+    "confirm_password_label": "Confirm password",
+    "name_error": "Name must contain at least one word character",
+    "password_error": "Password required",
+    "confirm_password_error": "Passwords do not match"
+  },
+
+  "history_list": {
+    "results": "Results",
+    "results_body": "${count} transactions, ${value} total"
+  },
+
+  "history_filters": {
+    "name_label": "Filter by name",
+    "name_help": "Example: \"Bananas,Apples,Oranges\"",
+    "category_label": "Filter by category",
+    "category_help": "Example: \"Food,Sport\"",
+    "tags_label": "Filter by tags",
+    "tags_help": "Example: Tag1,Tag2,Tag3",
+    "type_title": "Filter by type",
+    "startdate_help": "From date",
+    "enddate_help": "To date"
+  },
+
+  "transaction_form": {
+    "create_new_transaction": "Create new transaction",
+    "value_label": "Value",
+    "value_error": "Should be a number",
+    "currency_label": "Currency",
+    "currency_error": "Should be valid currency code",
+    "name_label": "Name",
+    "name_error": "Transaction name is required",
+    "category_label": "Category",
+    "tags_label": "Tag"
+  }
+}
