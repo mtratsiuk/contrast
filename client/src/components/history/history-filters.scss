@@ -2,10 +2,16 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  width: 100%;
+  max-width: 1150px;
   margin-bottom: 40px;
 
   > * {
-    width: 45%;
+    width: 30%;
+
+    @include tablet-content {
+      width: 45%;
+    }
 
     @include mobile {
       width: 100%;

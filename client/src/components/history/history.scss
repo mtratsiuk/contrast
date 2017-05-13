@@ -3,6 +3,7 @@
 
   &__items {
     margin: 20px 0;
+    max-width: 850px;
   }
 
   &__item {
@@ -17,6 +18,15 @@
     &:not(:last-child) {
       margin-bottom: 8px;
     }
+  }
+
+  &__results-header {
+    @include mdc-typography(headline);
+  }
+
+  &__results-body {
+    @include mdc-typography(body1);
+    font-size: 1rem;
   }
 }
 

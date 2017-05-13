@@ -42,11 +42,14 @@ class History extends React.Component {
 
     return (
       <div className='History'>
-        <div className='History__results'>
-          {result != null &&
-            `Results: ${filteredItems.length} transactions, ${currencyService.format(result)} total`
-          }
-        </div>
+        {result != null &&
+          <div className='History__results'>
+            <div className='History__results-header'>Results:</div>
+            <div className='History__results-body'>
+              {filteredItems.length} transactions, {currencyService.format(result)} total
+            </div>
+          </div>
+        }
         <div className='History__items'>
           {_.pipe(
             _.orderBy('timestamp', 'desc'),
