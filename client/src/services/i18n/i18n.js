@@ -15,7 +15,7 @@ class I18n {
   }
 
   async setLanguage (lang) {
-    this._source = await this._loadTransations(lang)
+    this._source = await this._loadTranslations(lang)
     storage.set(LANG_KEY, lang)
     return store.dispatch({
       type: 'I18N.SET_LANGUAGE',
@@ -27,7 +27,7 @@ class I18n {
     return storage.get(LANG_KEY) || 'en'
   }
 
-  async _loadTransations (lang) {
+  async _loadTranslations (lang) {
     let compileTemplates = value => {
       return typeof value === 'string'
         ? _.template(value)
