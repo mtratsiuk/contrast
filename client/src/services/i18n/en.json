@@ -3,6 +3,7 @@
   "income": "Income",
   "transaction": "Transaction",
   "history": "History",
+  "settings": "Settings",
 
   "login": "Log In",
   "logout": "Log Out",
@@ -44,5 +45,10 @@
     "name_error": "Transaction name is required",
     "category_label": "Category",
     "tags_label": "Tag"
+  },
+
+  "settings_page": {
+    "currency_label": "Preferred currency",
+    "currency_error": "Should be valid currency code"
   }
 }

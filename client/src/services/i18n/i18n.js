@@ -27,6 +27,12 @@ class I18n {
     return storage.get(LANG_KEY) || 'en'
   }
 
+  getAvailableLanguages () {
+    return [
+      { title: 'English', data: 'en' }
+    ]
+  }
+
   async _loadTranslations (lang) {
     let compileTemplates = value => {
       return typeof value === 'string'

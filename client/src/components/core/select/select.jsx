@@ -24,6 +24,12 @@ class Select extends React.Component {
     this._mdcSelect.destroy()
   }
 
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.input == null) {
+      this._setInput(nextProps.value)
+    }
+  }
+
   _setInput (value) {
     let { model, setInput } = this.props
     setInput(model, value, false, { config: inputConfig })
@@ -75,9 +81,10 @@ Select.propTypes = {
 }
 
 export default connect(
-  (state, { model, value, options }) => {
+  (state, { model, getInitialValue = () => '', options }) => {
     return {
-      value: _.get(`forms.${model}.value`, state) || value || options[0]
+      value: _.get(`forms.${model}.value`, state) || getInitialValue() || options[0],
+      input: _.get(`forms.${model}`, state)
     }
   },
   { setInput }

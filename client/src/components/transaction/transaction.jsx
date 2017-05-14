@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import Form from 'components/core/form'
 import { Input, MultiInput } from 'components/core/input'
+import CurrencyInput from 'components/transaction/currency-input'
 import Select from 'components/core/select'
 import Fab from 'components/core/fab'
 import withTranslations from 'components/core/i18n'
@@ -40,12 +41,10 @@ class Transaction extends React.Component {
           required
           style={{ width: '60%' }}
         />
-        <Input
+        <CurrencyInput
           model='transaction.currency'
           label={t('transaction_form.currency_label')}
-          validate={value => (autocomplete.currencyCodes || []).indexOf(value) >= 0}
           errorText={t('transaction_form.currency_error')}
-          autocomplete={autocomplete.currencyCodes}
           required
           style={{ width: '35%' }}
         />

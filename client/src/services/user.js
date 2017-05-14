@@ -46,7 +46,11 @@ class UserService extends EventEmitter {
   }
 
   getPreferredCurrency () {
-    return (storage.get(CURRENCY_KEY) || {}).preferredCurrency || 'USD'
+    return storage.get(CURRENCY_KEY) || 'USD'
+  }
+
+  setPreferredCurrency (currency) {
+    storage.set(CURRENCY_KEY, currency)
   }
 
 }

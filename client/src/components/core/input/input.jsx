@@ -42,8 +42,9 @@ class Input extends React.Component {
   componentWillReceiveProps (nextProps) {
     let { dispatch } = this.props
 
+    let isValid = this.validate(nextProps.value, nextProps.form)
+
     if (this.props.form !== nextProps.form) {
-      let isValid = this.validate(nextProps.value, nextProps.form)
       if (!nextProps.invalid !== isValid) {
         dispatch(setInputValidation(nextProps.model, !isValid))
       }
@@ -53,6 +54,10 @@ class Input extends React.Component {
         !nextProps.form.submitted) {
         this._blurred = false
         this._dirty = false
+      }
+
+      if (nextProps.input == null) {
+        dispatch(setInput(nextProps.model, nextProps.value, !isValid))
       }
     }
 
@@ -203,10 +208,15 @@ Input.defaultProps = {
   validate: () => true
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  value: _.get(`forms.${ownProps.model}.value`, state) || '',
-  invalid: _.get(`forms.${ownProps.model}.invalid`, state),
-  form: _.get(`forms.${ownProps.model.split('.')[0]}`, state)
-})
+const mapStateToProps = (state, { model, getInitialValue = () => '' }) => {
+  let input = _.get(`forms.${model}`, state)
+
+  return {
+    input,
+    value: (input && input.value != null) ? input.value : getInitialValue(),
+    invalid: input && input.invalid,
+    form: _.get(`forms.${model.split('.')[0]}`, state)
+  }
+}
 
 export default connect(mapStateToProps)(Input)

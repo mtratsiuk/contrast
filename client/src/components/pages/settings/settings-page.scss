@@ -1,0 +1,26 @@
+.SettingsPage {
+  $max-form-width: 650px;
+
+  width: 100%;
+  max-width: $max-form-width;
+  position: relative;
+  align-self: flex-start;
+  padding-bottom: 90px;
+
+  .mdc-select__menu {
+    max-width: $max-form-width;
+  }
+
+  &__fab {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    z-index: 9;
+
+    @include tablet {
+      position: fixed;
+      right: 1rem;
+      bottom: 1rem;
+    }
+  }
+}
