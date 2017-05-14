@@ -49,18 +49,23 @@ class Select extends React.Component {
           <span className='mdc-select__selected-text'>{value.title}</span>
           <div className='mdc-simple-menu mdc-select__menu'>
             <ul className='mdc-list mdc-simple-menu__items'>
-              {_.map(option => (
-                <li
-                  key={option.title}
-                  className='mdc-list-item'
-                  role='option'
-                  id={option.title}
-                  tabIndex='0'
-                  aria-selected={option === value}
-                >
-                  {option.title}
-                </li>
-              ))(options)}
+              {_.map(option => {
+                let aria = option.title === value.title
+                   ? { 'aria-selected': true }
+                   : {}
+                return (
+                  <li
+                    key={option.title}
+                    className='mdc-list-item'
+                    role='option'
+                    id={option.title}
+                    tabIndex='0'
+                    {...aria}
+                  >
+                    {option.title}
+                  </li>
+                )
+              })(options)}
             </ul>
           </div>
         </div>

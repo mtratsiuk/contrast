@@ -9,11 +9,15 @@ import user from 'services/user'
 import { saveSettings } from 'actions/settings'
 
 const SettingsPage = ({ t, dispatch }) => {
+  let languages = i18n.getAvailableLanguages()
+  let currentLanguage = i18n.getUserLanguage()
+
   return (
     <Form
       model='settings'
       className='SettingsPage'
       onSubmit={formData => dispatch(saveSettings(formData))}
+      clearAfterSubmit={false}
     >
       <CurrencyInput
         model='settings.currency'
@@ -23,7 +27,8 @@ const SettingsPage = ({ t, dispatch }) => {
       />
       <Select
         model='settings.language'
-        options={i18n.getAvailableLanguages()}
+        options={languages}
+        getInitialValue={() => _.find(x => x.data === currentLanguage, languages)}
       />
       <Fab className='SettingsPage__fab' />
     </Form>

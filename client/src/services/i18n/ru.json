@@ -1,0 +1,54 @@
+{
+  "expense": "Расход",
+  "income": "Доход",
+  "transaction": "Транзакция",
+  "history": "История",
+  "settings": "Настройки",
+
+  "login": "Войти",
+  "logout": "Выйти",
+  "signup": "Зарегистрироваться",
+  "name": "Имя",
+  "password": "Пароль",
+
+  "auth": {
+    "confirm_password_label": "Подтвердите пароль",
+    "name_error": "Имя должно содержать хотя бы один символ",
+    "password_error": "Укажите пароль",
+    "confirm_password_error": "Пароли не совпадают"
+  },
+
+  "history_list": {
+    "results": "Результат",
+    "results_body": "${count} транзакций, ${value} в сумме"
+  },
+
+  "history_filters": {
+    "name_label": "Фильтр по названиям",
+    "name_help": "Пример: \"Бананы,Яблоки,Апельсины\"",
+    "category_label": "Фильтр по категориям",
+    "category_help": "Пример: \"Еда,Спорт\"",
+    "tags_label": "Фильтр по тегам",
+    "tags_help": "Пример: Фрукты,Овощи",
+    "type_title": "Фильтр по типу",
+    "startdate_help": "Начальная дата",
+    "enddate_help": "Конечная дата"
+  },
+
+  "transaction_form": {
+    "create_new_transaction": "Создайте новую транзакцию",
+    "value_label": "Стоимость",
+    "value_error": "Введите число",
+    "currency_label": "Валюта",
+    "currency_error": "Выберите корректный код валюты",
+    "name_label": "Название",
+    "name_error": "Укажите название транзакции",
+    "category_label": "Категория",
+    "tags_label": "Тег"
+  },
+
+  "settings_page": {
+    "currency_label": "Базовая валюта",
+    "currency_error": "Выберите корректный код валюты"
+  }
+}

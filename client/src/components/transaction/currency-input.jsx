@@ -20,6 +20,8 @@ class CurrencyInput extends React.Component {
   render () {
     let { currencyCodes } = this.state
 
+    if (!currencyCodes.length) return null
+
     return (
       <Input
         {...this.props}

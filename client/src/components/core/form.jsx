@@ -17,7 +17,8 @@ class Form extends React.Component {
       setFormSubmitted,
       clearForm,
       className,
-      children
+      children,
+      clearAfterSubmit = true
     } = this.props
 
     return (
@@ -25,7 +26,7 @@ class Form extends React.Component {
         event.preventDefault()
         if (form.invalid) return setFormSubmitted(model, true)
         if (onSubmit) onSubmit(getFormData(form))
-        clearForm(model)
+        clearAfterSubmit ? clearForm(model) : setFormSubmitted(model, false)
       }}>
         {children}
       </form>

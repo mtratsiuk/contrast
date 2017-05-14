@@ -29,7 +29,8 @@ class I18n {
 
   getAvailableLanguages () {
     return [
-      { title: 'English', data: 'en' }
+      { title: 'English', data: 'en' },
+      { title: 'Русский', data: 'ru' }
     ]
   }
 
