@@ -37,10 +37,8 @@ export default db => {
       })).rows.map(({ doc }) => new Transaction(doc))
     }
 
-    static async getFieldsSuggestions () {
-      let suggestions = (await db.allDocs({
-        include_docs: true
-      })).rows.reduce((result, { doc }) => {
+    static async getFieldsSuggestions (docs) {
+      let suggestions = (docs || (await Transaction.getAll())).reduce((result, doc) => {
         _.forEach(tag => result.tags.add(tag), doc.tags)
         result.names.add(doc.name)
         if (doc.category) result.categories.add(doc.category)

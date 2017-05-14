@@ -4,6 +4,7 @@ PouchDB.plugin(pouchDBFind)
 
 import store from 'store'
 import { logout } from 'actions/user'
+import { loadTransactions } from 'actions/transactions'
 import user from 'services/user'
 import logger from 'shared/logger'
 
@@ -11,6 +12,7 @@ class Pouch {
   constructor () {
     this._db = null
     this._dbSync = null
+    this._dbChanges = null
 
     if (user.isLoggedIn()) {
       this._init(user.getData())
@@ -39,10 +41,21 @@ class Pouch {
         store.dispatch(logout())
       }
     })
+
+    this._dbChanges = this._db.changes({
+      since: 'now',
+      live: true,
+      include_docs: false
+    }).on('change', () => {
+      store.dispatch(loadTransactions())
+    }).on('error', error => {
+      logger.error(error)
+    })
   }
 
   _destroy () {
     this._dbSync.cancel()
+    this._dbChanges.cancel()
     this._db.destroy()
     this._db = null
   }

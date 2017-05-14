@@ -18,6 +18,7 @@ class Input extends React.Component {
 
     this.handleChange = this.handleChange.bind(this)
     this.handleInputChange = this.handleInputChange.bind(this)
+    this.handleSelect = this.handleSelect.bind(this)
     this.validate = this.validate.bind(this)
     this.receiveAutocomplete = this.receiveAutocomplete.bind(this)
   }
@@ -87,6 +88,12 @@ class Input extends React.Component {
     this.handleChange(value)
   }
 
+  handleSelect (selectedValue) {
+    let { value, autocompleteModifyOnSelect } = this.props
+    if (!autocompleteModifyOnSelect) return this.handleChange(selectedValue)
+    this.handleChange(autocompleteModifyOnSelect(value, selectedValue))
+  }
+
   validate (value, nextForm) {
     let isValid = this.props.validate(value, nextForm || this.props.form)
     this.inputElement.setCustomValidity(isValid ? '' : 'Error')
@@ -101,11 +108,11 @@ class Input extends React.Component {
         ref={el => { this.inputElement = el }}
         items={autocomplete}
         onChange={this.handleInputChange}
-        onSelect={this.handleChange}
+        onSelect={this.handleSelect}
         getItemValue={item => item}
         inputProps={inputProps}
         value={value}
-        shouldItemRender={autocompleteFilter}
+        shouldItemRender={this.props.autocompleteFilter || autocompleteFilter}
         sortItems={autocompleteSort}
         onMenuVisibilityChange={isOpen => this.setState({ isOpen })}
         renderItem={(item, isHighlighted) =>

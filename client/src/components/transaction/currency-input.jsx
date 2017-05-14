@@ -2,6 +2,7 @@ import React from 'react'
 
 import { Input } from 'components/core/input'
 import { getCurrencyCodes } from 'services/currency'
+import user from 'services/user'
 
 class CurrencyInput extends React.Component {
   constructor (props) {
@@ -25,6 +26,7 @@ class CurrencyInput extends React.Component {
     return (
       <Input
         {...this.props}
+        getInitialValue={() => user.getPreferredCurrency()}
         validate={value => (currencyCodes || []).indexOf(value) >= 0}
         autocomplete={currencyCodes}
       />

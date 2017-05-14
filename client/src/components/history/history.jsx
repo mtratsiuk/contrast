@@ -2,45 +2,23 @@ import React from 'react'
 import { connect } from 'react-redux'
 import classnames from 'classnames'
 
-import { filter } from 'components/history/utils'
 import withTranslations from 'components/core/i18n'
 
-import { getTransactions } from 'actions/history'
-import { getFormData } from 'utils/forms'
+import { loadTransactions } from 'actions/transactions'
 import * as currencyService from 'services/currency'
 
 class History extends React.Component {
   constructor (props) {
     super(props)
-
-    this.state = {}
-
     this.renderTransaction = this.renderTransaction.bind(this)
   }
 
   componentDidMount () {
-    this.props.getTransactions()
-  }
-
-  componentWillReceiveProps (nextProps) {
-    if (this.props.items !== nextProps.items ||
-      this.props.filterQuery !== nextProps.filterQuery) {
-      this.setHistory(nextProps)
-    }
-  }
-
-  async setHistory (props) {
-    let { items, filterQuery } = props
-    let filteredItems = filter(items, getFormData(filterQuery))
-    return this.setState({
-      filteredItems,
-      result: await currencyService.calculateBalance(filteredItems)
-    })
+    this.props.loadTransactions()
   }
 
   render () {
-    let { filteredItems, result } = this.state
-    let { t } = this.props
+    let { items, result, t } = this.props
 
     return (
       <div className='History'>
@@ -49,7 +27,7 @@ class History extends React.Component {
             <div className='History__results-header'>{t('history_list.results')}:</div>
             <div className='History__results-body'>
               {t('history_list.results_body', {
-                count: filteredItems.length,
+                count: items.length,
                 value: currencyService.format(result)
               })}
             </div>
@@ -59,7 +37,7 @@ class History extends React.Component {
           {_.pipe(
             _.orderBy('timestamp', 'desc'),
             _.map(this.renderTransaction)
-          )(filteredItems)}
+          )(items)}
         </div>
       </div>
     )
@@ -88,8 +66,8 @@ class History extends React.Component {
 
 export default connect(
   state => ({
-    items: _.get('history.items', state),
-    filterQuery: _.get('forms.historyFilters', state)
+    items: _.get('transactions.filtered', state),
+    result: _.get('transactions.filteredBalance', state)
   }),
-  { getTransactions }
+  { loadTransactions }
 )(withTranslations(History))

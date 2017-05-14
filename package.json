@@ -1,6 +1,6 @@
 {
   "name": "contrast",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "scripts": {
     "start": "docker-compose build --force-rm --no-cache --pull && docker-compose up -d",
     "test": "standard"

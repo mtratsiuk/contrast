@@ -8,13 +8,13 @@ import Select from 'components/core/select'
 import Fab from 'components/core/fab'
 import withTranslations from 'components/core/i18n'
 
-import { createTransaction, getAutocompleteItems } from 'actions/transaction'
+import { createTransaction, loadTransactions } from 'actions/transactions'
 
 import { required, emptyOr } from 'utils/validators'
 
 class Transaction extends React.Component {
   componentDidMount () {
-    this.props.getAutocompleteItems()
+    this.props.loadTransactions()
   }
 
   render () {
@@ -76,7 +76,7 @@ class Transaction extends React.Component {
 
 export default connect(
   state => ({
-    autocomplete: _.get('transaction.autocomplete', state)
+    autocomplete: _.get('transactions.autocomplete', state)
   }),
-  { createTransaction, getAutocompleteItems }
+  { createTransaction, loadTransactions }
 )(withTranslations(Transaction))
