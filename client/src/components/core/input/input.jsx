@@ -58,6 +58,8 @@ class Input extends React.Component {
 
       if (nextProps.input == null) {
         dispatch(setInput(nextProps.model, nextProps.value, !isValid))
+        this._blurred = false
+        this._dirty = false
       }
     }
 
