@@ -90,6 +90,7 @@ class Input extends React.Component {
 
   handleSelect (selectedValue) {
     let { value, autocompleteModifyOnSelect } = this.props
+    this.inputElement.focus()
     if (!autocompleteModifyOnSelect) return this.handleChange(selectedValue)
     this.handleChange(autocompleteModifyOnSelect(value, selectedValue))
   }
