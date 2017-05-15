@@ -16,3 +16,6 @@ render(
   </Provider>,
   document.getElementById('root')
 )
+
+import { __SEED__ } from 'utils/seed'
+window.__SEED__ = __SEED__

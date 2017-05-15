@@ -51,6 +51,10 @@ export default db => {
 
       return _.mapValues(x => Array.from(x), suggestions)
     }
+
+    static async bulkUpdate (docs) {
+      return db.bulkDocs(docs)
+    }
   }
 
   return Transaction
