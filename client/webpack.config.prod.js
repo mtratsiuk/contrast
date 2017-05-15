@@ -7,6 +7,8 @@ const BabiliPlugin = require('babili-webpack-plugin')
 const base = require('./webpack.config')
 
 let prodConfig = merge(base, {
+  devtool: 'inline-source-map',
+
   module: {
     rules: [
       {
