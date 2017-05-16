@@ -50,18 +50,20 @@ const generateTransaction = ({ category, names, tags, currencies, type, value })
   }
 }
 
-const getSeedTransactions = () => {
-  let _seedExpense = _.map(i => generateTransaction(_.sample(seedExpense)))(_.range(0, 500))
-  let _seedIncome = _.map(i => generateTransaction(_.sample(seedIncome)))(_.range(0, 36))
+const getSeedTransactions = (expCount = 100, incCount = 36) => {
+  let _seedExpense = _.map(i => generateTransaction(_.sample(seedExpense)))(_.range(0, expCount))
+  let _seedIncome = _.map(i => generateTransaction(_.sample(seedIncome)))(_.range(0, incCount))
 
   return _seedExpense.concat(_seedIncome)
 }
 
-const seed = () => async (dispatch, { models: { Transaction }, getState }) => {
-  let transactions = getSeedTransactions().map(t => new Transaction(t))
+const seed = (expCount, incCount) => async (dispatch, { models: { Transaction }, getState }) => {
+  let deleted = (await Transaction.getAll()).map(t => ({ ...t, _deleted: true }))
+  await Transaction.bulkUpdate(deleted)
+  let transactions = getSeedTransactions(expCount, incCount).map(t => new Transaction(t))
   return Transaction.bulkUpdate(transactions)
 }
 
-export const __SEED__ = () => {
-  store.dispatch(seed())
+export const __SEED__ = (expCount, incCount) => {
+  store.dispatch(seed(expCount, incCount))
 }
