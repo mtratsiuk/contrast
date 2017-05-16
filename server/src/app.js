@@ -12,7 +12,7 @@ const STATIC_PATH = path.resolve(__dirname, `${process.env.CONTRAST_SERVER_STATI
 
 const app = express()
 
-app.use(bodyParser.json())
+app.use(bodyParser.json({ limit: '10mb' }))
 app.use(cookieParser())
 
 app.use('/api', routes)
