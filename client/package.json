@@ -31,7 +31,7 @@
   "dependencies": {
     "classnames": "~2.2.5",
     "lodash": "~4.17.4",
-    "material-components-web": "~0.10.0",
+    "material-components-web": "~0.11.0",
     "money": "^0.2.0",
     "normalize.css": "~5.0.0",
     "pouchdb": "~6.1.2",

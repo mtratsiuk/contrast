@@ -9,6 +9,7 @@
     flex-shrink: 0;
     overflow-y: auto;
     overflow-x: hidden;
+    z-index: 999;
   }
 
   &__content {
@@ -20,13 +21,24 @@
     justify-content: center;
   }
 
-  // Hot-fix, remove after https://github.com/material-components/material-components-web/pull/555
-  .mdc-temporary-drawer {
-    opacity: 0;
+  &__build-version {
+    position: absolute;
+    bottom: 70px;
+    left: 5px;
 
-    &--open {
-      opacity: 1;
+    @include tablet {
+      bottom: 5px;
     }
+  }
+
+  .mdc-temporary-drawer__drawer, .Sidenav__permanent {
+    position: relative;
+  }
+
+  .mdc-toolbar__row {
+    padding-top: 0;
+    padding-bottom: 0;
+    align-items: center;
   }
 }
 

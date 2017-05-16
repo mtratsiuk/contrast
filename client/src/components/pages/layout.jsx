@@ -58,6 +58,7 @@ const Layout = ({
               )(appRoutes)
             }
           </nav>
+          <div className='Layout__build-version'>Build: {__VERSION__}</div>
         </Sidenav>
       </div>
 
