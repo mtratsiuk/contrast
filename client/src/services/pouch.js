@@ -8,6 +8,8 @@ import { loadTransactions } from 'actions/transactions'
 import user from 'services/user'
 import logger from 'shared/logger'
 
+const BATCH_SIZE = 1000
+
 class Pouch {
   constructor () {
     this._db = null
@@ -26,31 +28,38 @@ class Pouch {
     return this._db
   }
 
-  _init (userData) {
+  async _init (userData) {
     let localDbName = userData.name
     let remoteDbName = `${window.location.origin}/api/sync/${userData.db}`
 
     this._db = new PouchDB(localDbName)
 
-    this._dbSync = this._db.sync(remoteDbName, {
-      live: true,
-      retry: true
-    }).on('error', error => {
-      logger.error(error)
-      if (error.status === 401) {
-        store.dispatch(logout())
-      }
-    })
+    try {
+      await this._db.sync(remoteDbName, {
+        batch_size: BATCH_SIZE
+      })
+    } finally {
+      this._dbSync = this._db.sync(remoteDbName, {
+        live: true,
+        retry: true,
+        batch_size: BATCH_SIZE
+      }).on('error', error => {
+        logger.error(error)
+        if (error.status === 401) {
+          store.dispatch(logout())
+        }
+      })
 
-    this._dbChanges = this._db.changes({
-      since: 'now',
-      live: true,
-      include_docs: false
-    }).on('change', () => {
-      store.dispatch(loadTransactions())
-    }).on('error', error => {
-      logger.error(error)
-    })
+      this._dbChanges = this._db.changes({
+        since: 'now',
+        live: true,
+        include_docs: false
+      }).on('change', () => {
+        store.dispatch(loadTransactions())
+      }).on('error', error => {
+        logger.error(error)
+      })
+    }
   }
 
   _destroy () {
