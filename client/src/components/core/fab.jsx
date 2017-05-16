@@ -13,7 +13,7 @@ class Fab extends React.PureComponent {
   }
 
   render () {
-    let { icon, disabled, style, className } = this.props
+    let { icon, disabled, style, className, onClick } = this.props
 
     let fabClassname = classnames('Fab', 'mdc-fab', 'material-icons', className)
 
@@ -24,6 +24,7 @@ class Fab extends React.PureComponent {
         className={fabClassname}
         aria-label={icon}
         disabled={disabled}
+        onClick={onClick}
       >
         <span className='mdc-fab__icon'>
           {icon}

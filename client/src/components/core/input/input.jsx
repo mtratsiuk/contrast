@@ -96,7 +96,7 @@ class Input extends React.Component {
   }
 
   validate (value, nextForm) {
-    let isValid = this.props.validate(value, nextForm || this.props.form)
+    let isValid = !!this.props.validate(value, nextForm || this.props.form)
     this.inputElement.setCustomValidity(isValid ? '' : 'Error')
     return isValid
   }
@@ -226,7 +226,7 @@ const mapStateToProps = (state, { model, getInitialValue = () => '' }) => {
 
   return {
     input,
-    value: (input && input.value != null) ? input.value : getInitialValue(),
+    value: (input && input.value != null) ? input.value : getInitialValue() || '',
     invalid: input && input.invalid,
     form: _.get(`forms.${model.split('.')[0]}`, state)
   }

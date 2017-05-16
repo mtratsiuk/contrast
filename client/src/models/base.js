@@ -7,8 +7,8 @@ export default db => {
 
     async save () {
       let response = await db[this._id ? 'put' : 'post'](this)
-      this._id = response._id
-      this._rev = response._rev
+      this._id = response.id
+      this._rev = response.rev
       return response
     }
 

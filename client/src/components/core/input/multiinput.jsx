@@ -23,20 +23,27 @@ class MultiInput extends React.Component {
 
   addInitialField (props) {
     if (!props.inputModels || !props.inputModels.length) {
+      let initialValues = props.getInitialValue && props.getInitialValue()
+      if (!_.isEmpty(initialValues)) {
+        return initialValues
+          .forEach(() => this.props.addMultiInputField(props.model))
+      }
       this.props.addMultiInputField(props.model)
     }
   }
 
   render () {
-    let { inputModels, inputs, ...inputProps } = this.props
+    let { inputModels, inputs, getInitialValue, ...inputProps } = this.props
+    let initialValues = getInitialValue && getInitialValue()
 
     return (
       <div className='MultiInput'>
-        {_.map(model =>
+        {_.mapi((model, index) =>
           <Input
             {...inputProps}
             key={model}
             model={model}
+            getInitialValue={initialValues && (() => initialValues[index])}
             snippet={inputModels.length > 1 &&
               <i onClick={() => this.props.removeMultiInputField(this.props.model, model)}
                 className='MultiInput__remove-snippet material-icons'>

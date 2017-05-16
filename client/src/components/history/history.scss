@@ -8,10 +8,17 @@
 
   &__item {
     @include mdc-elevation(1);
+    @include mdc-ripple-base;
+    @include mdc-ripple-bg((pseudo: "::before"));
+    @include mdc-ripple-fg((pseudo: "::after"));
+    overflow: hidden;
+    position: relative;
+
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: flex-start;
+    cursor: pointer;
 
     padding: 8px;
 

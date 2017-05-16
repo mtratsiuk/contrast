@@ -31,6 +31,10 @@ export default db => {
       return this.type === 'income'
     }
 
+    static async getById (id) {
+      return new Transaction(await db.get(id))
+    }
+
     static async getAll () {
       return (await db.allDocs({
         include_docs: true

@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import classnames from 'classnames'
+import { push } from 'react-router-redux'
 
 import withTranslations from 'components/core/i18n'
 
@@ -45,7 +46,7 @@ class History extends React.Component {
 
   renderTransaction (transaction) {
     return (
-      <div className='History__item' key={transaction._id}>
+      <div className='History__item' key={transaction._id} onClick={() => this.props.push(`/transaction/${transaction._id}`)}>
         <div className='History-item__group'>
           <div className='History-item__main'>{transaction.name}</div>
           <div className='History-item__secondary'>{transaction.getFormattedDate()}</div>
@@ -69,5 +70,5 @@ export default connect(
     items: _.get('transactions.filtered', state),
     result: _.get('transactions.filteredBalance', state)
   }),
-  { loadTransactions }
+  { loadTransactions, push }
 )(withTranslations(History))

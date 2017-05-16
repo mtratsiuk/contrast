@@ -1,3 +1,5 @@
+import { push } from 'react-router-redux'
+
 import { getFormData } from 'utils/forms'
 import * as currencyService from 'services/currency'
 
@@ -22,6 +24,15 @@ export const loadTransactions = payload => async (dispatch, { models: { Transact
   })
 }
 
+export const loadTransaction = id => async (dispatch, { models: { Transaction } }) => {
+  let transaction = await Transaction.getById(id)
+
+  return dispatch({
+    type: 'TRANSACTIONS.CURRENT_LOADED',
+    payload: transaction
+  })
+}
+
 export const updateFiltered = () => async (dispatch, { models: { Transaction }, getState }) => {
   let state = getState()
   let filterQuery = getFilterQuery(state)
@@ -38,10 +49,18 @@ export const updateFiltered = () => async (dispatch, { models: { Transaction }, 
   })
 }
 
-export const createTransaction = payload => async (dispatch, { models: { Transaction } }) => {
-  payload.value = payload.value.replace(',', '.')
+export const createTransaction = (payload, redirect = false) => async (dispatch, { models: { Transaction } }) => {
   let transaction = new Transaction(payload)
   await transaction.save() // TODO: Error handling
+
+  if (redirect) {
+    dispatch(push('/history'))
+  }
+}
+
+export const deleteTransaction = transaction => async (dispatch, { models: { Transaction } }) => {
+  await transaction.remove() // TODO: Error handling
+  dispatch(push('/history'))
 }
 
 export const _filter = (transactions, query) => {

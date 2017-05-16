@@ -4,7 +4,8 @@ import SettingsPage from 'components/pages/settings'
 
 export default [
   {
-    path: '/transaction',
+    path: '/transaction/:id?',
+    linkPath: '/transaction',
     title: 'transaction',
     icon: 'star',
     component: TransactionPage

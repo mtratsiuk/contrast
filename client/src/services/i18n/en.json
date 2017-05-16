@@ -37,6 +37,7 @@
 
   "transaction_form": {
     "create_new_transaction": "Create new transaction",
+    "edit_transaction": "Edit transaction",
     "value_label": "Value",
     "value_error": "Should be a number",
     "currency_label": "Currency",

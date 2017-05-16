@@ -46,7 +46,7 @@ const Layout = ({
               _.map(route =>
                 <NavLink
                   key={route.title}
-                  to={route.path}
+                  to={route.linkPath || route.path}
                   activeClassName='mdc-permanent-drawer--selected mdc-temporary-drawer--selected'
                   className='mdc-list-item'
                   onClick={() => { sidenav.close() }}

@@ -37,6 +37,7 @@
 
   "transaction_form": {
     "create_new_transaction": "Создайте новую транзакцию",
+    "edit_transaction": "Редактирование транзакции",
     "value_label": "Стоимость",
     "value_error": "Введите число",
     "currency_label": "Валюта",
