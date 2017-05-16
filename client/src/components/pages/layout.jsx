@@ -67,7 +67,7 @@ const Layout = ({
           {
             _.pipe(
               _.map(route => <Route key={route.path} {...route} />),
-              _.concat(_, <Redirect key='redirect' from='/' to={appRoutes[0].path} />)
+              _.concat(_, <Redirect key='redirect' from='/' to={appRoutes[0].linkPath} />)
             )(appRoutes)
           }
         </Switch>
