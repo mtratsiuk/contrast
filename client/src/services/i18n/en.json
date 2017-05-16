@@ -45,7 +45,8 @@
     "name_label": "Name",
     "name_error": "Transaction name is required",
     "category_label": "Category",
-    "tags_label": "Tag"
+    "tags_label": "Tag",
+    "timestamp_label": "Transaction date"
   },
 
   "settings_page": {

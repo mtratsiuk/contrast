@@ -45,7 +45,8 @@
     "name_label": "Название",
     "name_error": "Укажите название транзакции",
     "category_label": "Категория",
-    "tags_label": "Тег"
+    "tags_label": "Тег",
+    "timestamp_label": "Дата транзакции"
   },
 
   "settings_page": {

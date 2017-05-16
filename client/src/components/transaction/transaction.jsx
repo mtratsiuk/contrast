@@ -75,6 +75,16 @@ class Transaction extends React.Component {
             errorText={t('transaction_form.name_error')}
             autocomplete={autocomplete.names}
             required
+            style={{ width: '60%' }}
+          />
+          <Input
+            model='transaction.timestamp'
+            type='date'
+            getInitialValue={() =>
+              transaction && new Date(_.get('timestamp', transaction)).toISOString().substr(0, 10)
+            }
+            helpText={t('transaction_form.timestamp_label')}
+            style={{ width: '35%' }}
           />
           <Input
             model='transaction.category'
