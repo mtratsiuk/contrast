@@ -174,7 +174,8 @@ class Input extends React.Component {
     })
 
     let labelClassname = classnames(className, 'mdc-textfield__label', {
-      'mdc-textfield__label--required': required
+      'mdc-textfield__label--required': required,
+      'mdc-textfield__label--float-above': value.length
     })
 
     let inputProps = {
