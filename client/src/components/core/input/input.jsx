@@ -149,7 +149,8 @@ class Input extends React.Component {
       required,
       className,
       style,
-      form
+      form,
+      snippet
     } = this.props
     let { autocomplete, isOpen } = this.state
 
@@ -210,6 +211,7 @@ class Input extends React.Component {
         <p className={helpTextClassname} id={helperId}>
           {helpText || errorText}
         </p>
+        {snippet}
       </div>
     )
   }

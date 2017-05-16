@@ -14,9 +14,20 @@ const forms = (state = {}, action) => {
       let [form, input] = action.model.split('.')
       let nextState = _.update(
         `${action.model}.fields`,
-        (fields = []) => fields.concat(`${form}.__${input}${fields.length}__`),
+        (fields = []) => fields.concat(`${form}.__${input}${action.fieldKey}__`),
         state
       )
+      return nextState
+    }
+    case 'FORMS.REMOVE_MULTIINPUT_FIELD': {
+      let fieldIndex = _.get(`${action.model}.fields`, state).indexOf(action.fieldModel)
+
+      let nextState = _.pipe(
+        _.update(`${action.model}.fields`, _.pullAt(fieldIndex)),
+        _.update(`${action.model}.value`, _.pullAt(fieldIndex)),
+        _.omit(`${action.fieldModel}`)
+      )(state)
+
       return nextState
     }
     case 'FORMS.SET_INPUT_VALIDATION': {

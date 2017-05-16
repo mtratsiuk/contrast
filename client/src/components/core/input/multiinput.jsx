@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import Input from 'components/core/input'
-import { addMultiInputField, setInput } from 'actions/forms'
+import { addMultiInputField, removeMultiInputField, setInput } from 'actions/forms'
 
 class MultiInput extends React.Component {
   componentDidMount () {
@@ -37,6 +37,12 @@ class MultiInput extends React.Component {
             {...inputProps}
             key={model}
             model={model}
+            snippet={inputModels.length > 1 &&
+              <i onClick={() => this.props.removeMultiInputField(this.props.model, model)}
+                className='MultiInput__remove-snippet material-icons'>
+                clear
+              </i>
+            }
           />, inputModels)
         }
         {!!_.get('value.length', _.last(inputs)) &&
@@ -67,5 +73,5 @@ export default connect(
       inputs
     }
   },
-  { addMultiInputField, setInput }
+  { addMultiInputField, removeMultiInputField, setInput }
 )(MultiInput)

@@ -8,9 +8,18 @@ export const setInput = (model, value, invalid, { config } = {}) => ({
   }
 })
 
+let fieldKey = 0
+
 export const addMultiInputField = model => ({
   type: 'FORMS.ADD_MULTIINPUT_FIELD',
-  model
+  model,
+  fieldKey: fieldKey++
+})
+
+export const removeMultiInputField = (model, fieldModel) => ({
+  type: 'FORMS.REMOVE_MULTIINPUT_FIELD',
+  model,
+  fieldModel
 })
 
 export const setInputValidation = (model, invalid) => ({

@@ -1,11 +1,23 @@
 .MultiInput {
   position: relative;
 
+  .Input {
+    position: relative;
+  }
+
   &__icon {
     @include mdc-theme-prop(color, text-secondary-on-background);
     position: absolute;
     left: 50%;
     top: 100%;
     transform: translate(-50%, 50%);
+  }
+
+  &__remove-snippet {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    cursor: pointer;
+    z-index: 1;
   }
 }
