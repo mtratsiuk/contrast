@@ -1,4 +1,3 @@
-import Hello from 'components/hello'
 import TransactionPage from 'components/pages/transaction'
 import HistoryPage from 'components/pages/history'
 import SettingsPage from 'components/pages/settings'
@@ -21,11 +20,5 @@ export default [
     title: 'settings',
     icon: 'star',
     component: SettingsPage
-  },
-  {
-    path: '/hello',
-    title: 'Hello',
-    icon: 'star',
-    component: Hello
   }
 ]
