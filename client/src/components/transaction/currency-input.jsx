@@ -26,7 +26,7 @@ class CurrencyInput extends React.Component {
     return (
       <Input
         {...this.props}
-        getInitialValue={() => user.getPreferredCurrency()}
+        getInitialValue={this.props.getInitialValue || (() => user.getPreferredCurrency())}
         validate={value => (currencyCodes || []).indexOf(value) >= 0}
         autocomplete={currencyCodes}
       />
