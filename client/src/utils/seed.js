@@ -46,7 +46,7 @@ const generateTransaction = ({ category, names, tags, currencies, type, value })
     currency: _.sample(currencies),
     value: _.random(...value),
     type,
-    timestamp: new Date(_.random(2015, 2017), _.random(0, 11), _.random(0, 31))
+    timestamp: (new Date(_.random(2015, 2017), _.random(0, 11), _.random(0, 31))).getTime()
   }
 }
 
