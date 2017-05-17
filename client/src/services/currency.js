@@ -14,7 +14,10 @@ export const getCurrencyCodes = async () => {
 }
 
 export const calculateBalance = async transactions => {
-  let { base, rates } = await getRates()
+  return calculateBalanceSync(transactions, await getRates())
+}
+
+export const calculateBalanceSync = (transactions, { base, rates }) => {
   let to = userService.getPreferredCurrency()
   fx.base = base
   fx.rates = rates

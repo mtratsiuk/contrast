@@ -1,6 +1,6 @@
 {
   "name": "contrast-client",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "description": "",
   "author": "Mihail Tratsiuk",
   "license": "MIT",
@@ -44,6 +44,7 @@
     "react-router": "~4.1.1",
     "react-router-dom": "~4.1.1",
     "react-router-redux": "~5.0.0-alpha.6",
+    "react-svg-piechart": "^1.2.3",
     "redux": "~3.6.0"
   },
   "babel": {

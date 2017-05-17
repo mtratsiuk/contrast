@@ -1,0 +1,32 @@
+.HistoryPieStats {
+  &__legend {
+    margin-top: 20px;
+  }
+}
+
+.HistoryPieStats-legend {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: default;
+
+  &--expand {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 5px;
+  }
+
+  &__color {
+    width: 10px;
+    height: 10px;
+    margin-right: 5px;
+  }
+
+  &--expand &__color {
+    width: 15px;
+    height: 15px;
+  }
+}

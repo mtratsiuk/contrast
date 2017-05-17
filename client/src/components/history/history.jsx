@@ -4,6 +4,7 @@ import classnames from 'classnames'
 import { push } from 'react-router-redux'
 
 import withTranslations from 'components/core/i18n'
+import HistoryPieStats from 'components/history/history-pie-stats'
 
 import { loadTransactions } from 'actions/transactions'
 import * as currencyService from 'services/currency'
@@ -23,22 +24,27 @@ class History extends React.Component {
 
     return (
       <div className='History'>
-        {result != null &&
-          <div className='History__results'>
-            <div className='History__results-header'>{t('history_list.results')}:</div>
-            <div className='History__results-body'>
-              {t('history_list.results_body', {
-                count: items.length,
-                value: currencyService.format(result)
-              })}
-            </div>
+        <div className='History__body'>
+          <div className='History__items'>
+            {_.pipe(
+              _.orderBy('timestamp', 'desc'),
+              _.map(this.renderTransaction)
+            )(items)}
           </div>
-        }
-        <div className='History__items'>
-          {_.pipe(
-            _.orderBy('timestamp', 'desc'),
-            _.map(this.renderTransaction)
-          )(items)}
+          <div className='History__pie-stats'>
+            {result != null &&
+              <div className='History__results'>
+                <div className='History__results-header'>{t('history_list.results')}:</div>
+                <div className='History__results-body'>
+                  {t('history_list.results_body', {
+                    count: items.length,
+                    value: currencyService.format(result)
+                  })}
+                </div>
+              </div>
+            }
+            <HistoryPieStats items={items} total={result} />
+          </div>
         </div>
       </div>
     )
