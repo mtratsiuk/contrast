@@ -82,7 +82,7 @@ export default connect(
     location: state.router.location,
     username: _.get('user.name', state),
     title: (_.find(
-      route => _.startsWith(route.path, state.router.location.pathname),
+      route => _.startsWith(state.router.location.pathname, route.path),
       appRoutes
     ) || {}).title || 'Contrast'
   })
