@@ -56,11 +56,25 @@ class HistoryPieStats extends React.Component {
 
   render () {
     let { expandedSector, data } = this.state
+    let { items, rates, title, t } = this.props
 
     if (!data) return null
 
+    let total = calculateBalanceSync(items, rates)
+
     return (
       <div className='HistoryPieStats'>
+        {total != null &&
+          <div className='History__results'>
+            <div className='History__results-header'>{title}:</div>
+            <div className='History__results-body'>
+              {t('history_list.results_body', {
+                count: items.length,
+                value: format(total)
+              })}
+            </div>
+          </div>
+        }
         <PieChart
           data={data}
           expandOnHover
@@ -71,7 +85,7 @@ class HistoryPieStats extends React.Component {
         />
         <div className='HistoryPieStats__legend'>
           {
-            _.mapi(({ color, label, formattedValue }, index) => (
+            _.mapi(({ color, label, value, formattedValue }, index) => (
               <div
                 onMouseEnter={() => this.handleMouseEnterOnSector(index)}
                 onMouseLeave={() => this.handleMouseEnterOnSector(null)}
@@ -84,7 +98,7 @@ class HistoryPieStats extends React.Component {
                   style={{ background: color }}
                 />
                 <div className='HistoryPieStats-legend__value'>
-                  {`${label}: ${formattedValue}`}
+                  {`${label}: ${formattedValue} (${((value / Math.abs(total)) * 100).toFixed(1)}%)`}
                 </div>
               </div>
             ))(data)

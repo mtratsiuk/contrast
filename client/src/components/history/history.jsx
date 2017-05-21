@@ -7,7 +7,6 @@ import withTranslations from 'components/core/i18n'
 import HistoryPieStats from 'components/history/history-pie-stats'
 
 import { loadTransactions } from 'actions/transactions'
-import * as currencyService from 'services/currency'
 
 class History extends React.Component {
   constructor (props) {
@@ -20,7 +19,7 @@ class History extends React.Component {
   }
 
   render () {
-    let { items, result, t } = this.props
+    let { items, t } = this.props
 
     return (
       <div className='History'>
@@ -32,18 +31,8 @@ class History extends React.Component {
             )(items)}
           </div>
           <div className='History__pie-stats'>
-            {result != null &&
-              <div className='History__results'>
-                <div className='History__results-header'>{t('history_list.results')}:</div>
-                <div className='History__results-body'>
-                  {t('history_list.results_body', {
-                    count: items.length,
-                    value: currencyService.format(result)
-                  })}
-                </div>
-              </div>
-            }
-            <HistoryPieStats items={items} total={result} />
+            <HistoryPieStats items={items.filter(x => x.isExpense)} title={t('expense')} t={t} />
+            <HistoryPieStats items={items.filter(x => x.isIncome)} title={t('income')} t={t} />
           </div>
         </div>
       </div>
@@ -73,8 +62,7 @@ class History extends React.Component {
 
 export default connect(
   state => ({
-    items: _.get('transactions.filtered', state),
-    result: _.get('transactions.filteredBalance', state)
+    items: _.get('transactions.filtered', state)
   }),
   { loadTransactions, push }
 )(withTranslations(History))

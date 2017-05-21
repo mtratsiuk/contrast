@@ -29,6 +29,21 @@
     max-width: 400px;
     flex-grow: 1;
     flex-shrink: 0;
+
+    > * {
+      margin-bottom: 20px;
+    }
+
+    @include tablet-content {
+      width: 100%;
+      max-width: 100%;
+      display: flex;
+      justify-content: space-around;
+    }
+
+    @include mobile {
+      flex-direction: column;
+    }
   }
 
   &__item {
