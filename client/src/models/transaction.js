@@ -12,11 +12,11 @@ export default db => {
       this.name = data.name
       this.category = data.category
       this.tags = (data.tags || []).filter(x => !!x)
-      this.timestamp = data.timestamp || Date.now()
+      this.timestamp = (new Date(data.timestamp)).getTime() || Date.now()
     }
 
     getFormattedDate () {
-      return (new Date(this.timestamp)).toLocaleString()
+      return (new Date(this.timestamp)).toLocaleDateString()
     }
 
     getFormattedValue () {

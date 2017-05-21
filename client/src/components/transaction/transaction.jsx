@@ -10,6 +10,7 @@ import withTranslations from 'components/core/i18n'
 
 import { createTransaction, deleteTransaction, loadTransactions } from 'actions/transactions'
 import { clearForm } from 'actions/forms'
+import user from 'services/user'
 
 import { required, emptyOr } from 'utils/validators'
 
@@ -61,7 +62,7 @@ class Transaction extends React.Component {
           />
           <CurrencyInput
             model='transaction.currency'
-            getInitialValue={() => _.get('currency', transaction)}
+            getInitialValue={() => _.get('currency', transaction) || user.getPreferredCurrency()}
             label={t('transaction_form.currency_label')}
             errorText={t('transaction_form.currency_error')}
             required
@@ -80,8 +81,17 @@ class Transaction extends React.Component {
           <Input
             model='transaction.timestamp'
             type='date'
+            validate={value => {
+              return value === '' ||
+                /[0-9]{4}-[0-9]{2}-[0-9]{2}/.test(value) &&
+                !!(new Date(value)).getTime()
+            }}
             getInitialValue={() =>
-              transaction && new Date(_.get('timestamp', transaction)).toISOString().substr(0, 10)
+              (transaction &&
+                new Date(_.get('timestamp', transaction)) ||
+                new Date()
+              )
+                .toISOString().substr(0, 10)
             }
             helpText={t('transaction_form.timestamp_label')}
             style={{ width: '35%' }}
